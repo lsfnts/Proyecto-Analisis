@@ -6,14 +6,8 @@
 package analisis.math;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -31,7 +25,7 @@ public class VM {
 			MULT = 0x05,
 			DIV = 0x06,
 			POT = 0x07,
-			ROOT = 0x08,
+			SQRT = 0x08,
 			SEN = 0x09,
 			COS = 0x0A,
 			TAN = 0x0B,
@@ -44,20 +38,13 @@ public class VM {
 			SECH = 0x12,
 			CSCH = 0x13,
 			COTH = 0x14,
-			EXP = 0x15,
-			LN = 0x16,
-			VARMUL = 0x17;
+			LN = 0x15,
+			VARMUL = 0x16;
 			
     
     private static ArrayDeque<Byte> instructions = new ArrayDeque<>();
 	private static ArrayDeque<Double> valueStack = new ArrayDeque<>();
 	private static ArrayDeque<Byte> instStack = new ArrayDeque<>();
-
-	/*public VM() {
-		instructions = new ArrayDeque<>();
-		valueStack = new ArrayDeque<>();
-		instStack = new ArrayDeque<>();
-	}*/
 	
 	public static double evualuar(String f){
 		try {
@@ -104,6 +91,15 @@ public class VM {
 					double dividen = valueStack.pop();
 					valueStack.push(dividen/divisor);
 					break;
+				case POT:
+					double exp = valueStack.pop();
+					double base = valueStack.pop();
+					valueStack.push(Math.pow(base, exp));
+					break;
+				case SQRT:
+					double rad = valueStack.pop();
+					valueStack.push(Math.sqrt(rad));
+					break;
             }
 			System.out.println(valueStack);
         }
@@ -111,7 +107,7 @@ public class VM {
     }
 	
 	
-	private static void equationToInstructions(String f) throws Exception{
+	private static void equationToInstructions(String f){
 		f = f.replaceAll(" ", "");
 		char c;
 		byte[] b;
@@ -134,7 +130,7 @@ public class VM {
 					i += (doub.length()-2);
 				}
 				else i += doub.length();
-			} else {
+			} else if (!Character.isLetter(c)){
 				switch(c){
 					case '(':
 						instStack.push(L_PAR);
@@ -144,6 +140,9 @@ public class VM {
 							instructions.add(instStack.pop());
 						}
 						instStack.removeFirst();
+						if(instStack.peek() >= SQRT){
+							instructions.add(instStack.pop());
+						}
 						break;
 					case '+':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
@@ -187,9 +186,23 @@ public class VM {
 							instStack.push(DIV);
 						}
 						break;
+					case '^':
+						if(instStack.isEmpty() || instStack.peek() == L_PAR){
+							instStack.push(POT);
+						} else {
+							while (instStack.peek() == SUMA || instStack.peek() == RESTA ||
+									instStack.peek() == MULT || instStack.peek() == DIV ||
+									instStack.peek() == POT){
+								instructions.add(instStack.pop());
+							}
+							instStack.push(DIV);
+						}
+						break;
 				}
 				System.out.println("instStack: "+instStack);
 				++i;
+			} else {
+				i += takeFun(f.substring(i));
 			}
 		}
 		while(!instStack.isEmpty()){
@@ -197,7 +210,7 @@ public class VM {
 		}
 	}
 	
-	private static byte [] doubleToBytes(double d) throws Exception{
+	private static byte [] doubleToBytes(double d){
 		byte[] output = new byte[OUTPUT_LENGTH];
 		StringBuilder input = new StringBuilder(OUTPUT_LENGTH);
 
@@ -255,6 +268,27 @@ public class VM {
 		}
 	}
 	
+	/**
+ * añane la funcion al stack y retorna la longitud para continuar iterando.
+ *
+ * @param ...
+ * @return int lenght
+ */
+	private static int takeFun(String s){
+		Scanner scanner = new Scanner(s);
+		scanner.useDelimiter("[0-9]|(\\(|\\)|\\*|\\+|\\-|\\=|\\[|\\]|\\^|\\/)");
+		String s1 = "";
+		if (scanner.hasNext()) {
+			s1 = scanner.next();
+			switch(s1){
+				case "sqrt":
+					instStack.push(SQRT);
+					break;
+			}
+		}
+		scanner.close();
+		return s1.length();
+	}
 	private static String takeNumber(String s){
 		// create a new scanner with the specified String Object
 		Scanner scanner = new Scanner(s);
@@ -267,10 +301,9 @@ public class VM {
 		// if the next is a double, print found and the double
 		double d=0;
 			// if the next is a double, print found and the double
-			if (scanner.hasNextDouble()) {
-				d =  scanner.nextDouble();
-			}
-
+		if (scanner.hasNextDouble()) {
+			d =  scanner.nextDouble();
+		}
 
 		scanner.close();
 		return String.valueOf(d);
