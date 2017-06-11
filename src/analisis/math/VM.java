@@ -39,23 +39,43 @@ public class VM {
 			CSCH = 0x13,
 			COTH = 0x14,
 			LN = 0x15,
-			VARMUL = 0x16;
+			VAR = 0x16,
+			VAR2 = 0x17,
+			VAR3 = 0x18;
 			
     
     private static ArrayDeque<Byte> instructions = new ArrayDeque<>();
 	private static ArrayDeque<Double> valueStack = new ArrayDeque<>();
 	private static ArrayDeque<Byte> instStack = new ArrayDeque<>();
 	
-	public static double evualuar(String f){
-		try {
-			equationToInstructions(f);
-		} catch (Exception ex) {
-			System.err.println(ex.getMessage());
-		}
-		return evaluar();
+	private static String var = "x";
+	private static String var2 = "y";
+	private static String var3 = "z";
+	
+	public static double eval(String fun, double valX){
+		prepare(fun);
+		return evaluarSimple(valX);
 	}
-    
-    private static double evaluar(){
+	
+	public static double eval(String fun, double valX, double valY){
+		prepare(fun);
+		return evaluarDoble(valX, valY);
+	}
+	
+	public static double eval(String fun, double valX, double valY, double valZ){
+		prepare(fun);
+		return evaluarTriple(valX, valY, valZ);
+	}
+	
+	private static double evaluarSimple(double var1Val){
+		return evaluarTriple(var1Val, 0, 0);
+	}
+	
+	private static double evaluarDoble(double var1Val, double var2Val){
+		return evaluarTriple(var1Val, var2Val, 0);
+	}
+
+    private static double evaluarTriple(double var1Val, double var2Val, double var3Val){
         int size = instructions.size();
 		System.out.println(instructions);
         while (!instructions.isEmpty()){
@@ -100,6 +120,24 @@ public class VM {
 					double rad = valueStack.pop();
 					valueStack.push(Math.sqrt(rad));
 					break;
+				case COS:
+					double t1 = valueStack.pop();
+					valueStack.push(Math.cos(t1));
+					break;
+				case SEN:
+					double t2 = valueStack.pop();
+					valueStack.push(Math.sin(t2));
+					break;
+				case TAN:
+					double t3 = valueStack.pop();
+					valueStack.push(Math.tan(t3));
+					break;
+				case VAR:
+					valueStack.push(var1Val);
+				case VAR2:
+					valueStack.push(var2Val);
+				case VAR3:
+					valueStack.push(var3Val);
             }
 			System.out.println(valueStack);
         }
@@ -107,7 +145,7 @@ public class VM {
     }
 	
 	
-	private static void equationToInstructions(String f){
+	private static void prepare(String f){
 		f = f.replaceAll(" ", "");
 		char c;
 		byte[] b;
@@ -280,10 +318,25 @@ public class VM {
 		String s1 = "";
 		if (scanner.hasNext()) {
 			s1 = scanner.next();
-			switch(s1){
-				case "sqrt":
-					instStack.push(SQRT);
-					break;
+			if(s1.equals(var)){
+				instructions.add(VAR);
+			} else if(s1.equals(var2)){
+				instructions.add(VAR2);
+			} else{
+				switch(s1){
+					case "sqrt":
+						instStack.push(SQRT);
+						break;
+					case "cos":
+						instStack.push(COS);
+						break;
+					case "sin": case "sen":
+						instStack.push(SEN);
+						break;
+					case "tan":
+						instStack.push(TAN);
+						break;
+				}
 			}
 		}
 		scanner.close();
