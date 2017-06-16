@@ -5,6 +5,8 @@
  */
 package analisis.gui.mod4;
 
+import analisis.math.Algoritmos;
+import analisis.math.VM;
 import de.erichseifert.gral.data.DataTable;
 
 /**
@@ -33,6 +35,11 @@ public class Modulo4 extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
 
         integralTButton.setText("jToggleButton1");
+        integralTButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                integralTButtonActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("jTextField1");
 
@@ -60,6 +67,12 @@ public class Modulo4 extends javax.swing.JPanel {
                 .addGap(58, 58, 58))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void integralTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_integralTButtonActionPerformed
+        String fun = jTextField1.getText();
+		
+		jTextField1.setText(Double.toString(Algoritmos.derivarPorDifCentrales(fun, 3, 1)));
+    }//GEN-LAST:event_integralTButtonActionPerformed
 
 	private DataTable data;
 	
