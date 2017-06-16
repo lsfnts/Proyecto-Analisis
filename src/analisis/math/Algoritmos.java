@@ -56,4 +56,63 @@ public class Algoritmos {
                 System.out.println("y'   = " + x2.getPartialDerivative(1));      
 
         }
+		
+		/**
+		 * 
+		 * @param fun
+		 * @param x
+		 * @param k
+		 * @return 
+		 */
+	public static double derivarPorDifCentrales(String fun, double x, int k){
+		return deltaCentral(fun, x, 0.000001, k)/Math.pow(0.000001, k);
+	}
+	
+		
+	private static double deltaCentral(String fun, double x, double h, int k){
+		double deltaY=0;
+		for (int i = 0; i <=k;++i){
+			if(i%2==0){
+				deltaY += comb(k, i)*VM.eval(fun, x + (h*((k/2)-i)) );
+			} else {
+				deltaY -= comb(k, i)*VM.eval(fun, x+ (h*((k/2)-i)));
+			}
+		}
+		
+		return deltaY;
+	}
+	
+	private static int comb(int m, int n){
+		int factorialmn = 1, factorialn = 1, factorialm = 1;
+		//Esto saca el factorial de m
+        for (int i = m; i > 0; i--) {
+            if (m == 0 || m == 1) {
+                factorialm = 1;
+                break;
+            }
+            factorialm = i * factorialm;
+        }
+
+        //Esto saca el factorial de n
+        for (int i = n; i > 0; i--) {
+            if (n == 0 || n == 1) {
+                factorialn = 1;
+                break;
+            }
+            factorialn = i * factorialn;
+        }
+
+        //Esto saca el factorial de n-m:
+        for (int i = m - n; i > 0; i--) {
+            if (m - n == 0 || m - n == 1) {
+                factorialmn = 1;
+                break;
+            }
+            factorialmn = i * factorialmn;
+        }
+
+        //Esto calcula la combinatoria de n & m:
+        return (factorialm / (factorialn * factorialmn));
+
+	}
 }
