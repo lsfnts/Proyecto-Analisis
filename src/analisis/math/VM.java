@@ -76,13 +76,10 @@ public class VM {
 	}
 
     private static double evaluarTriple(double var1Val, double var2Val, double var3Val){
-        int size = instructions.size();
-		System.out.println(instructions);
+		//System.out.println(instructions);
         while (!instructions.isEmpty()){
 			
             byte e = instructions.pop();
-			System.out.println(instructions.size());
-			System.out.println(e);
             switch(e){
 				case NUM:
 					byte[] values = new byte[OUTPUT_LENGTH];
@@ -134,10 +131,13 @@ public class VM {
 					break;
 				case VAR:
 					valueStack.push(var1Val);
+					break;
 				case VAR2:
 					valueStack.push(var2Val);
+					break;
 				case VAR3:
 					valueStack.push(var3Val);
+					break;
             }
 			System.out.println(valueStack);
         }
@@ -177,10 +177,10 @@ public class VM {
 						while(instStack.peek() != L_PAR) {
 							instructions.add(instStack.pop());
 						}
-						instStack.removeFirst();
 						if(instStack.peek() >= SQRT){
 							instructions.add(instStack.pop());
 						}
+						instStack.removeFirst();
 						break;
 					case '+':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
@@ -225,7 +225,7 @@ public class VM {
 						}
 						break;
 					case '^':
-						if(instStack.isEmpty() || instStack.peek() == L_PAR){
+						/*if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(POT);
 						} else {
 							while (instStack.peek() == SUMA || instStack.peek() == RESTA ||
@@ -233,8 +233,8 @@ public class VM {
 									instStack.peek() == POT){
 								instructions.add(instStack.pop());
 							}
-							instStack.push(DIV);
-						}
+							instStack.push(POT);
+						}*/instStack.push(POT);
 						break;
 				}
 				System.out.println("instStack: "+instStack);
@@ -319,7 +319,9 @@ public class VM {
 		if (scanner.hasNext()) {
 			s1 = scanner.next();
 			if(s1.equals(var)){
+				System.out.println(var);
 				instructions.add(VAR);
+				System.out.println(instructions);
 			} else if(s1.equals(var2)){
 				instructions.add(VAR2);
 			} else{
