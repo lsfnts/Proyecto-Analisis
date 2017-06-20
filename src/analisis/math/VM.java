@@ -52,35 +52,58 @@ public class VM {
 	private static String var2 = "y";
 	private static String var3 = "z";
 	
+	/**
+	 * 
+	 * @param fun cadena que representa la funcion ej. "2*x+3"
+	 * @param valX punto a evaluar (valor de x)
+	 * @return 
+	 */
 	public static double eval(String fun, double valX){
 		prepare(fun);
-		return evaluarSimple(valX);
+		return evaluar(valX, 0, 0);
 	}
 	
+	/**
+	 * 
+	 * @param fun cadena que representa la funcion ej. "2*x+3-y"
+	 * @param valX punto a evaluar (valor de x)
+	 * @param valY punto a evaluar (valor de y)
+	 * @return 
+	 */
 	public static double eval(String fun, double valX, double valY){
 		prepare(fun);
-		return evaluarDoble(valX, valY);
+		return evaluar(valX, valY, 0);
 	}
 	
+	/**
+	 * 
+	 * @param fun cadena que representa la funcion ej. "2*x+3-y^z"
+	 * @param valX punto a evaluar (valor de x)
+	 * @param valY punto a evaluar (valor de y)
+	 * @param valZ punto a evaluar (valor de z)
+	 * @return 
+	 */
 	public static double eval(String fun, double valX, double valY, double valZ){
 		prepare(fun);
-		return evaluarTriple(valX, valY, valZ);
+		return evaluar(valX, valY, valZ);
 	}
-	
-	private static double evaluarSimple(double var1Val){
-		return evaluarTriple(var1Val, 0, 0);
-	}
-	
-	private static double evaluarDoble(double var1Val, double var2Val){
-		return evaluarTriple(var1Val, var2Val, 0);
-	}
-
-    private static double evaluarTriple(double var1Val, double var2Val, double var3Val){
+	/**
+	 * evalua la expresión guardada y devuelve el resultado
+	 * @param var1Val
+	 * @param var2Val
+	 * @param var3Val
+	 * @return 
+	 */
+    private static double evaluar(double var1Val, double var2Val, double var3Val){
 		//System.out.println(instructions);
+		
+		//recorre el stack hasta que no encuentre mas instrucciones
         while (!instructions.isEmpty()){
-			
+			//toma la primera instrucción y realiza la accion apropiada
             byte e = instructions.pop();
             switch(e){
+				//indica que los siguientes bytes representan un numero
+				//toma su valor y lo agrega al stack de valores
 				case NUM:
 					byte[] values = new byte[OUTPUT_LENGTH];
 					for(int j = OUTPUT_LENGTH - 1; j >= 0; j--){
@@ -88,6 +111,8 @@ public class VM {
 					}
 					valueStack.push(bytesToDouble(values));
 					break;
+				//toma los primeros valores del stack de valores
+				// y realiza la operación respectiva
 				case SUMA:
 					double s2 = valueStack.pop();
 					double s1 = valueStack.pop();
@@ -129,6 +154,7 @@ public class VM {
 					double t3 = valueStack.pop();
 					valueStack.push(Math.tan(t3));
 					break;
+				//indica que es una variable, guarda en el stack el valor
 				case VAR:
 					valueStack.push(var1Val);
 					break;
@@ -144,7 +170,11 @@ public class VM {
 		return valueStack.pop();
     }
 	
-	
+	/**
+	 * recibe una cadena que representa una función y prepara el stack con las
+	 * operaciones y valores contenidos
+	 * @param f 
+	 */
 	private static void prepare(String f){
 		f = f.replaceAll(" ", "");
 		char c;
@@ -248,6 +278,11 @@ public class VM {
 		}
 	}
 	
+	/**
+	 * recibe un doble y devuelve un arreglo de bytes que lo representa
+	 * @param d
+	 * @return 
+	 */
 	private static byte [] doubleToBytes(double d){
 		byte[] output = new byte[OUTPUT_LENGTH];
 		StringBuilder input = new StringBuilder(OUTPUT_LENGTH);
@@ -283,6 +318,11 @@ public class VM {
 		return output;
 	}
 	
+	/**
+	 * recibe un arreglo de bytes y devuelve el double representado
+	 * @param b
+	 * @return 
+	 */
 	private static double bytesToDouble(byte[] b){
 		StringBuilder builder = new StringBuilder(OUTPUT_LENGTH);
 		boolean negative = false;
@@ -307,11 +347,11 @@ public class VM {
 	}
 	
 	/**
- * añane la funcion al stack y retorna la longitud para continuar iterando.
- *
- * @param ...
- * @return int lenght
- */
+	* recibe una cadena y agrega al stack la función correspondiente
+	*
+	* @param ...
+	* @return int lenght
+	*/
 	private static int takeFun(String s){
 		Scanner scanner = new Scanner(s);
 		scanner.useDelimiter("[0-9]|(\\(|\\)|\\*|\\+|\\-|\\=|\\[|\\]|\\^|\\/)");
@@ -319,12 +359,12 @@ public class VM {
 		if (scanner.hasNext()) {
 			s1 = scanner.next();
 			if(s1.equals(var)){
-				System.out.println(var);
 				instructions.add(VAR);
-				System.out.println(instructions);
 			} else if(s1.equals(var2)){
 				instructions.add(VAR2);
-			} else{
+			} else if(s1.equals(var3)){
+				instructions.add(VAR3);
+			}else{
 				switch(s1){
 					case "sqrt":
 						instStack.push(SQRT);
@@ -345,17 +385,15 @@ public class VM {
 		return s1.length();
 	}
 	private static String takeNumber(String s){
-		// create a new scanner with the specified String Object
+		// crea un scanner con la cadena
 		Scanner scanner = new Scanner(s);
 		scanner.useDelimiter("[a-zA-Z]|(\\(|\\)|\\*|\\+|\\-|\\=|\\[|\\]|\\^|\\/)");
 
 		// use US locale to be able to identify doubles in the string
-		scanner.useLocale(Locale.US);
-		// find the next double token and print it
-		// loop for the whole scanner
-		// if the next is a double, print found and the double
+		//scanner.useLocale(Locale.US);
+
 		double d=0;
-			// if the next is a double, print found and the double
+			// si el siguiente es doble toma el valor
 		if (scanner.hasNextDouble()) {
 			d =  scanner.nextDouble();
 		}
