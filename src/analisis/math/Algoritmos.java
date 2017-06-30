@@ -15,7 +15,7 @@ public class Algoritmos {
 	
 	public static double ReglaDeSimpsonDoble(String f, double a, double b, String c, String d){
 		//n=20, m=20
-		double h = (a-b)/20;
+		double h = (b-a)/20;
 		double J1=0, J2=0, J3=0;
 		
 		for(int i = 0; i <= 20; ++i){
@@ -44,6 +44,26 @@ public class Algoritmos {
 		
 		return h*(J1 + 2*J2 + 4*J3)/3;
 	}
+	
+	public static double ReglaDeSimpsonSimple(String f, double a, double b){
+		//n=10
+		double h = (b-a)/20;
+		double K1=0, K2=0, K3=0;
+		
+		double x;
+		for(int i = 0; i <= 20; ++i){
+			System.out.println(i);
+			x = a+(i*h);
+			
+			
+			if(i == 0 || i == 20) K1 += VM.eval(f, x);
+			else if (i % 2 == 0) K2 += VM.eval(f, x);
+			else K3 += VM.eval(f, x);
+		}
+		
+		return h*(K1 + 2*K2 + 4*K3)/3;
+	}
+	
         public static void derivarFuncionX(int orderF, double xRealValue, int numDerivaciones){
             //orderF es la cantidad de variables, numDerivaciones es la cantidad de derivadas, 
             //y el xRealValue es el valor que vamos a evaluar en la funcion
@@ -59,9 +79,9 @@ public class Algoritmos {
 		
 		/**
 		 * 
-		 * @param fun
-		 * @param x
-		 * @param k
+		 * @param fun string que representa la funcion
+		 * @param x punto a evaluar
+		 * @param k grado de la derivada
 		 * @return 
 		 */
 	public static double derivarPorDifCentrales(String fun, double x, int k){
