@@ -216,7 +216,7 @@ public class VM {
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(SUMA);
 						} else {
-							while(instStack.peek() == SUMA || instStack.peek() == RESTA){
+							while(!instStack.isEmpty()){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(SUMA);
@@ -226,7 +226,7 @@ public class VM {
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(RESTA);
 						} else {
-							while(!instStack.isEmpty() && (instStack.peek() == SUMA || instStack.peek() == RESTA)){
+							while(!instStack.isEmpty()){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(RESTA);
@@ -235,9 +235,13 @@ public class VM {
 					case '*':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(MULT);
+						} else if(instStack.peek() == SUMA || instStack.peek() == RESTA){
+							instStack.push(MULT);
 						} else {
-							while (instStack.peek() == SUMA || instStack.peek() == RESTA ||
-									instStack.peek() == MULT || instStack.peek() == DIV){
+							while (instStack.peek() == POT || instStack.peek() == SQRT || 
+								instStack.peek() == TAN || instStack.peek() == SEN ||
+								instStack.peek() == COS || instStack.peek() == MULT ||
+									instStack.peek() == DIV){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(MULT);
@@ -246,25 +250,31 @@ public class VM {
 					case '/':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(DIV);
+						} else if(instStack.peek() == SUMA || instStack.peek() == RESTA){
+							instStack.push(DIV);
 						} else {
-							while (instStack.peek() == SUMA || instStack.peek() == RESTA ||
-									instStack.peek() == MULT || instStack.peek() == DIV){
+							while (instStack.peek() == POT || instStack.peek() == SQRT || 
+								instStack.peek() == TAN || instStack.peek() == SEN ||
+								instStack.peek() == COS || instStack.peek() == MULT ||
+									instStack.peek() == DIV){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(DIV);
 						}
 						break;
 					case '^':
-						/*if(instStack.isEmpty() || instStack.peek() == L_PAR){
+						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(POT);
-						} else {
-							while (instStack.peek() == SUMA || instStack.peek() == RESTA ||
+						} else if (instStack.peek() == SUMA || instStack.peek() == RESTA ||
 									instStack.peek() == MULT || instStack.peek() == DIV ||
 									instStack.peek() == POT){
+								instStack.push(POT);
+						} else {
+							while(instStack.peek() == SQRT || instStack.peek() == TAN ||
+									instStack.peek() == SEN || instStack.peek() == COS){
 								instructions.add(instStack.pop());
 							}
-							instStack.push(POT);
-						}*/instStack.push(POT);
+						}
 						break;
 				}
 				System.out.println("instStack: "+instStack);
