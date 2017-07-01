@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package analisis.math;
-
-import org.apache.commons.math3.analysis.differentiation.DerivativeStructure;
-
 /**
  *
  * @author Luis
@@ -64,18 +61,7 @@ public class Algoritmos {
 		return h*(K1 + 2*K2 + 4*K3)/3;
 	}
 	
-        public static void derivarFuncionX(int orderF, double xRealValue, int numDerivaciones){
-            //orderF es la cantidad de variables, numDerivaciones es la cantidad de derivadas, 
-            //y el xRealValue es el valor que vamos a evaluar en la funcion
-          
-              DerivativeStructure x = new DerivativeStructure(orderF, numDerivaciones, 0, xRealValue);
-               
-                DerivativeStructure x2 = x.pow(2);
-                 // Basically, x --> x^2.
-                System.out.println("y    = " + x2.getValue());
-                System.out.println("y'   = " + x2.getPartialDerivative(1));      
-
-        }
+      
 		
 		/**
 		 * 
