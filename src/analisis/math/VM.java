@@ -41,7 +41,8 @@ public class VM {
 			LN = 0x15,
 			VAR = 0x16,
 			VAR2 = 0x17,
-			VAR3 = 0x18;
+			VAR3 = 0x18,
+			NEG = 0x19;
 			
     
     private static ArrayDeque<Byte> instructions = new ArrayDeque<>();
@@ -122,6 +123,9 @@ public class VM {
 					double sus = valueStack.pop();
 					double min = valueStack.pop();
 					valueStack.push(min-sus);
+				case NEG:
+					double neg = valueStack.pop();
+					valueStack.push(-neg);
 					break;
 				case MULT:
 					double fac2 = valueStack.pop();
@@ -182,6 +186,7 @@ public class VM {
 		
 		int max = f.length();
 		int i = 0;
+		boolean lastNumRPar = false;
 		while(i < max){
 			c = f.charAt(i);
 			System.out.println("caracter actual: "+c);
@@ -198,10 +203,12 @@ public class VM {
 					i += (doub.length()-2);
 				}
 				else i += doub.length();
+				lastNumRPar = true;
 			} else if (!Character.isLetter(c)){
 				switch(c){
 					case '(':
 						instStack.push(L_PAR);
+						lastNumRPar = false;
 						break;
 					case ')':
 						while(instStack.peek() != L_PAR) {
@@ -211,6 +218,7 @@ public class VM {
 							instructions.add(instStack.pop());
 						}
 						instStack.removeFirst();
+						lastNumRPar = true;
 						break;
 					case '+':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
@@ -221,8 +229,12 @@ public class VM {
 							}
 							instStack.push(SUMA);
 						}
+						lastNumRPar = false;
 						break;
 					case '-':
+						if(instructions.isEmpty() || lastNumRPar){
+							instStack.push(NEG);
+						}
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(RESTA);
 						} else {
@@ -231,56 +243,52 @@ public class VM {
 							}
 							instStack.push(RESTA);
 						}
+						lastNumRPar = false;
 						break;
 					case '*':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(MULT);
-						} else if(instStack.peek() == SUMA || instStack.peek() == RESTA){
+						} else if(precedence(MULT) > precedence(instStack.peek())){
 							instStack.push(MULT);
 						} else {
-							while (instStack.peek() == POT || instStack.peek() == SQRT || 
-								instStack.peek() == TAN || instStack.peek() == SEN ||
-								instStack.peek() == COS || instStack.peek() == MULT ||
-									instStack.peek() == DIV){
+							while (precedence(MULT) <= precedence(instStack.peek())){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(MULT);
 						}
+						lastNumRPar = false;
 						break;
 					case '/':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(DIV);
-						} else if(instStack.peek() == SUMA || instStack.peek() == RESTA){
+						} else if(precedence(DIV) > precedence(instStack.peek())){
 							instStack.push(DIV);
 						} else {
-							while (instStack.peek() == POT || instStack.peek() == SQRT || 
-								instStack.peek() == TAN || instStack.peek() == SEN ||
-								instStack.peek() == COS || instStack.peek() == MULT ||
-									instStack.peek() == DIV){
+							while (precedence(DIV) <= precedence(instStack.peek())){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(DIV);
 						}
+						lastNumRPar = false;
 						break;
 					case '^':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(POT);
-						} else if (instStack.peek() == SUMA || instStack.peek() == RESTA ||
-									instStack.peek() == MULT || instStack.peek() == DIV ||
-									instStack.peek() == POT){
+						} else if (precedence(POT) >= precedence(instStack.peek())){
 								instStack.push(POT);
 						} else {
-							while(instStack.peek() == SQRT || instStack.peek() == TAN ||
-									instStack.peek() == SEN || instStack.peek() == COS){
+							while(precedence(POT) < precedence(instStack.peek())){
 								instructions.add(instStack.pop());
 							}
 						}
+						lastNumRPar = false;
 						break;
 				}
 				System.out.println("instStack: "+instStack);
 				++i;
 			} else {
 				i += takeFun(f.substring(i));
+				lastNumRPar = false;
 			}
 		}
 		while(!instStack.isEmpty()){
@@ -410,5 +418,23 @@ public class VM {
 
 		scanner.close();
 		return String.valueOf(d);
+	}
+	
+	private static int precedence(byte op){
+		switch(op){
+			case SQRT:	case SEN:	case COS:	case TAN:	case SEC:	case CSC:
+			case COT:	case SENH:	case COSH:	case TANH:	case SECH:	case CSCH:
+			case COTH:	case LN:
+				return 6;
+			case POT:
+				return 5;
+			case NEG:
+				return 4;
+			case MULT:	case DIV:
+				return 3;
+			case SUMA:	case RESTA:
+				return 2;
+			default: return 0;
+		}
 	}
 }
