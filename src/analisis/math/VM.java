@@ -232,16 +232,17 @@ public class VM {
 						lastNumRPar = false;
 						break;
 					case '-':
-						if(instructions.isEmpty() || lastNumRPar){
+						if(instructions.isEmpty() || !lastNumRPar){
 							instStack.push(NEG);
-						}
-						if(instStack.isEmpty() || instStack.peek() == L_PAR){
-							instStack.push(RESTA);
 						} else {
-							while(!instStack.isEmpty()){
-								instructions.add(instStack.pop());
+							if(instStack.isEmpty() || instStack.peek() == L_PAR){
+								instStack.push(RESTA);
+							} else {
+								while(!instStack.isEmpty()){
+									instructions.add(instStack.pop());
+								}
+								instStack.push(RESTA);
 							}
-							instStack.push(RESTA);
 						}
 						lastNumRPar = false;
 						break;
