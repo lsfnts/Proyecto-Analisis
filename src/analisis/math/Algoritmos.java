@@ -104,7 +104,7 @@ public class Algoritmos {
 	}
 	
 		
-	private static double deltaCentral(String fun, double x, double h, int k){
+	public static double deltaCentral(String fun, double x, double h, int k){
 		double deltaY=0;
 		for (int i = 0; i <=k;++i){
 			if(i%2==0){
@@ -150,4 +150,10 @@ public class Algoritmos {
         return (factorialm / (factorialn * factorialmn));
 
 	}
+        public static String rectasTangentes(String funcion, Double valorinicial){
+               double res;
+                res= ((derivar(funcion,valorinicial,1)-(VM.eval(funcion, valorinicial))));
+            
+            return String.valueOf(res);
+        }
 }

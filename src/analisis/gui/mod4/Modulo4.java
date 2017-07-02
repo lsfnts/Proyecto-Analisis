@@ -71,7 +71,7 @@ public class Modulo4 extends javax.swing.JPanel {
     private void integralTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_integralTButtonActionPerformed
         String fun = jTextField1.getText();
 		
-		jTextField1.setText(Double.toString(Algoritmos.derivarPorDifCentrales(fun, 3, 1)));
+		jTextField1.setText(Double.toString(Algoritmos.deltaCentral(fun, 3, 1,6)));
     }//GEN-LAST:event_integralTButtonActionPerformed
 
 	private DataTable data;
