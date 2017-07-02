@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mod1;
+package analisis.gui.mod1;
 
 import analisis.math.Algoritmos;
 import javax.swing.table.DefaultTableModel;
@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class Modulo1 extends javax.swing.JFrame {
     
     public static DefaultTableModel modelo = new DefaultTableModel();
+    public static String funcion;
      
 
     /**
@@ -58,130 +59,101 @@ public class Modulo1 extends javax.swing.JFrame {
         lbl_advertencia = new javax.swing.JLabel();
         lbl_estado = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        btn_Graphics = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_funcionNewton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_funcionNewtonActionPerformed(evt);
             }
         });
+        getContentPane().add(txt_funcionNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 102, 135, -1));
+        getContentPane().add(txt_toleranciaNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 142, 135, -1));
 
-        jLabel1.setText("Funcion f(x)");
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel1.setText("Funcion f(x):");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 106, -1, -1));
 
-        jLabel2.setText("Tolerancia");
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel2.setText("Tolerancia:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 146, -1, -1));
 
+        btn_EjectuarNewton.setBackground(new java.awt.Color(255, 0, 51));
+        btn_EjectuarNewton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         btn_EjectuarNewton.setText("Ejecutar");
         btn_EjectuarNewton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_EjectuarNewtonActionPerformed(evt);
             }
         });
+        getContentPane().add(btn_EjectuarNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
+        getContentPane().add(txt_iteracionesNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 85, -1));
+        getContentPane().add(txt_raizNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 108, -1));
 
-        jLabel3.setText("Iteraciones");
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel3.setText("# Iteraciones:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
-        jLabel4.setText("Raiz encontrada");
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel4.setText("Raiz encontrada:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, -1, -1));
 
         table_newton.setModel(modelo);
         jScrollPane1.setViewportView(table_newton);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 650, 310));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 0, 255));
         jLabel5.setText("METODO DE NEWTON RAPHSON");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 13, -1, -1));
 
-        lbl_advertencia.setText("00000");
+        lbl_advertencia.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        lbl_advertencia.setText("Funcionando a la Perfeccion");
+        getContentPane().add(lbl_advertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 520, -1, -1));
 
-        lbl_estado.setText("jLabel6");
+        lbl_estado.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        lbl_estado.setForeground(new java.awt.Color(255, 0, 51));
+        getContentPane().add(lbl_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel6.setText("Tolerancia por defecto 10^-6");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 182, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(388, 388, 388)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbl_estado)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_EjectuarNewton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_advertencia)
-                        .addGap(324, 324, 324))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_funcionNewton)
-                            .addComponent(txt_toleranciaNewton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(130, 130, 130))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txt_iteracionesNewton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(86, 86, 86)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txt_raizNewton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_funcionNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_toleranciaNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_iteracionesNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_raizNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_EjectuarNewton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_estado)
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_advertencia)
-                        .addGap(66, 66, 66))))
-        );
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel7.setText("Advertencias:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 520, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel8.setText("Resultados:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel9.setText("Tabla de datos:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel10.setText("Estado:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+
+        btn_Graphics.setBackground(new java.awt.Color(255, 0, 51));
+        btn_Graphics.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        btn_Graphics.setText("Mostrar Grafica");
+        btn_Graphics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_GraphicsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Graphics, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,7 +164,6 @@ public class Modulo1 extends javax.swing.JFrame {
 
     private void btn_EjectuarNewtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EjectuarNewtonActionPerformed
 //*****INICIALIZANDO VARIBALES***********************************************    
-        String funcion;
         String valor;
         Double tolerancia;
         Boolean vida = true;
@@ -247,6 +218,23 @@ public class Modulo1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_EjectuarNewtonActionPerformed
 
+    private void btn_GraphicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GraphicsActionPerformed
+        // TODO add your handling code here:
+        Boolean vida = true;
+        while(vida != false){
+        if(txt_funcionNewton.getText().equals("")){
+            lbl_advertencia.setText("Por favor ingrese una funcion para mostrar su grafica");
+            break;   
+            }else{
+            break;
+        }
+        }
+        
+        NewtonGraphics graficaNewton= new NewtonGraphics();
+        graficaNewton.setVisible(true);
+        
+    }//GEN-LAST:event_btn_GraphicsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,12 +273,17 @@ public class Modulo1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_EjectuarNewton;
+    private javax.swing.JButton btn_Graphics;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_advertencia;
     private javax.swing.JLabel lbl_estado;

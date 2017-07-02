@@ -6,7 +6,7 @@
 package analisis.gui;
 
 import analisis.gui.mod4.Modulo4;
-import mod1.Modulo1;
+import analisis.gui.mod1.Modulo1;
 import analisis.gui.mod3.Modulo3des;
 import analisis.math.VM;
 

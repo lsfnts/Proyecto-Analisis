@@ -5,7 +5,7 @@
  */
 package analisis.math;
 import java.text.DecimalFormat;
-import static mod1.Modulo1.modelo;
+import static analisis.gui.mod1.Modulo1.modelo;
 /**
  *
  * @author Luis
