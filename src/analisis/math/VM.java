@@ -41,16 +41,66 @@ public class VM {
 			LN = 0x15,
 			VAR = 0x16,
 			VAR2 = 0x17,
-			VAR3 = 0x18;
+			VAR3 = 0x18,
+			NEG = 0x19;
 			
     
     private static ArrayDeque<Byte> instructions = new ArrayDeque<>();
 	private static ArrayDeque<Double> valueStack = new ArrayDeque<>();
 	private static ArrayDeque<Byte> instStack = new ArrayDeque<>();
 	
-	private static String var = "x";
-	private static String var2 = "y";
-	private static String var3 = "z";
+	private static String var1 = "";
+	private static String var2 = "";
+	private static String var3 = "";
+	
+	/**
+	 * 
+	 * @param fun función a evaluar
+	 * @param valX valor de la variable
+	 * @param var1 nombre de la variable variable
+	 * @return 
+	 */
+	public static double eval(String fun, double valX, String var1){
+		VM.var1 = var1;
+		prepare(fun);
+		return evaluar(valX, 0, 0);
+	}
+	
+	/**
+	 * 
+	 * @param fun función a evaluar
+	 * @param valX valor de primera variable
+	 * @param var1 nombre de primera variable
+	 * @param valY valor de segunda variable
+	 * @param var2 nombre de segunda variable
+	 * @return 
+	 */
+	public static double eval(String fun, double valX, String var1, double valY, String var2){
+		VM.var1 = var1;
+		VM.var2 = var2;
+		prepare(fun);
+		return evaluar(valX, valY, 0);
+	}
+	
+	/**
+	 * 
+	 * @param fun función a evaluar
+	 * @param valX valor de primera variable
+	 * @param var1 nombre de primera variable
+	 * @param valY valor de segunda variable
+	 * @param var2 nombre de segunda variable
+	 * @param valZ valor de tercera variable
+	 * @param var3 nombre de tercera variable
+	 * @return 
+	 */
+	public static double eval(String fun, double valX, String var1, double valY,
+			String var2, double valZ, String var3){
+		VM.var1 = var1;
+		VM.var2 = var2;
+		VM.var3 = var3;
+		prepare(fun);
+		return evaluar(valX, valY, valZ);
+	}
 	
 	/**
 	 * 
@@ -59,6 +109,7 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX){
+		resetVar();
 		prepare(fun);
 		return evaluar(valX, 0, 0);
 	}
@@ -71,6 +122,7 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX, double valY){
+		resetVar();
 		prepare(fun);
 		return evaluar(valX, valY, 0);
 	}
@@ -84,9 +136,17 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX, double valY, double valZ){
+		resetVar();
 		prepare(fun);
 		return evaluar(valX, valY, valZ);
 	}
+	
+	private static void resetVar(){
+		VM.var1 = "x";
+		VM.var2 = "y";
+		VM.var3 = "z";
+	}
+	
 	/**
 	 * evalua la expresión guardada y devuelve el resultado
 	 * @param var1Val
@@ -122,6 +182,9 @@ public class VM {
 					double sus = valueStack.pop();
 					double min = valueStack.pop();
 					valueStack.push(min-sus);
+				case NEG:
+					double neg = valueStack.pop();
+					valueStack.push(-neg);
 					break;
 				case MULT:
 					double fac2 = valueStack.pop();
@@ -154,6 +217,46 @@ public class VM {
 					double t3 = valueStack.pop();
 					valueStack.push(Math.tan(t3));
 					break;
+				case SEC:
+					double t4 = valueStack.pop();
+					valueStack.push(1/Math.cos(t4));
+					break;
+				case CSC:
+					double t5 = valueStack.pop();
+					valueStack.push(1/Math.sin(t5));
+					break;
+				case COT:
+					double t6 = valueStack.pop();
+					valueStack.push(Math.cos(t6)/Math.sin(t6));
+					break;
+				case SENH:
+					double h1 = valueStack.pop();
+					valueStack.push(Math.sinh(h1));
+					break;
+				case COSH:
+					double h2 = valueStack.pop();
+					valueStack.push(Math.cosh(h2));
+					break;
+				case TANH:
+					double h3 = valueStack.pop();
+					valueStack.push(Math.sinh(h3)/Math.cosh(h3));
+					break;
+				case SECH:
+					double h4 = valueStack.pop();
+					valueStack.push(1/Math.cosh(h4));
+					break;
+				case CSCH:
+					double h5 = valueStack.pop();
+					valueStack.push(1/Math.sinh(h5));
+					break;
+				case COTH:
+					double h6 = valueStack.pop();
+					valueStack.push(Math.cosh(h6)/Math.sinh(h6));
+					break;
+				case LN:
+					double a = valueStack.pop();
+					valueStack.push(Math.log(a));
+					break;
 				//indica que es una variable, guarda en el stack el valor
 				case VAR:
 					valueStack.push(var1Val);
@@ -176,12 +279,13 @@ public class VM {
 	 * @param f 
 	 */
 	private static void prepare(String f){
-		f = f.replaceAll(" ", "");
+		f = f.replaceAll(" ", "").toLowerCase();
 		char c;
 		byte[] b;
 		
 		int max = f.length();
 		int i = 0;
+		boolean lastNumRPar = false;
 		while(i < max){
 			c = f.charAt(i);
 			System.out.println("caracter actual: "+c);
@@ -198,10 +302,12 @@ public class VM {
 					i += (doub.length()-2);
 				}
 				else i += doub.length();
+				lastNumRPar = true;
 			} else if (!Character.isLetter(c)){
 				switch(c){
 					case '(':
 						instStack.push(L_PAR);
+						lastNumRPar = false;
 						break;
 					case ')':
 						while(instStack.peek() != L_PAR) {
@@ -211,6 +317,7 @@ public class VM {
 							instructions.add(instStack.pop());
 						}
 						instStack.removeFirst();
+						lastNumRPar = true;
 						break;
 					case '+':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
@@ -221,66 +328,67 @@ public class VM {
 							}
 							instStack.push(SUMA);
 						}
+						lastNumRPar = false;
 						break;
 					case '-':
-						if(instStack.isEmpty() || instStack.peek() == L_PAR){
-							instStack.push(RESTA);
+						if(instructions.isEmpty() || !lastNumRPar){
+							instStack.push(NEG);
 						} else {
-							while(!instStack.isEmpty()){
-								instructions.add(instStack.pop());
+							if(instStack.isEmpty() || instStack.peek() == L_PAR){
+								instStack.push(RESTA);
+							} else {
+								while(!instStack.isEmpty()){
+									instructions.add(instStack.pop());
+								}
+								instStack.push(RESTA);
 							}
-							instStack.push(RESTA);
 						}
+						lastNumRPar = false;
 						break;
 					case '*':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(MULT);
-						} else if(instStack.peek() == SUMA || instStack.peek() == RESTA){
+						} else if(precedence(MULT) > precedence(instStack.peek())){
 							instStack.push(MULT);
 						} else {
-							while (instStack.peek() == POT || instStack.peek() == SQRT || 
-								instStack.peek() == TAN || instStack.peek() == SEN ||
-								instStack.peek() == COS || instStack.peek() == MULT ||
-									instStack.peek() == DIV){
+							while (precedence(MULT) <= precedence(instStack.peek())){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(MULT);
 						}
+						lastNumRPar = false;
 						break;
 					case '/':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(DIV);
-						} else if(instStack.peek() == SUMA || instStack.peek() == RESTA){
+						} else if(precedence(DIV) > precedence(instStack.peek())){
 							instStack.push(DIV);
 						} else {
-							while (instStack.peek() == POT || instStack.peek() == SQRT || 
-								instStack.peek() == TAN || instStack.peek() == SEN ||
-								instStack.peek() == COS || instStack.peek() == MULT ||
-									instStack.peek() == DIV){
+							while (precedence(DIV) <= precedence(instStack.peek())){
 								instructions.add(instStack.pop());
 							}
 							instStack.push(DIV);
 						}
+						lastNumRPar = false;
 						break;
 					case '^':
 						if(instStack.isEmpty() || instStack.peek() == L_PAR){
 							instStack.push(POT);
-						} else if (instStack.peek() == SUMA || instStack.peek() == RESTA ||
-									instStack.peek() == MULT || instStack.peek() == DIV ||
-									instStack.peek() == POT){
+						} else if (precedence(POT) >= precedence(instStack.peek())){
 								instStack.push(POT);
 						} else {
-							while(instStack.peek() == SQRT || instStack.peek() == TAN ||
-									instStack.peek() == SEN || instStack.peek() == COS){
+							while(precedence(POT) < precedence(instStack.peek())){
 								instructions.add(instStack.pop());
 							}
 						}
+						lastNumRPar = false;
 						break;
 				}
 				System.out.println("instStack: "+instStack);
 				++i;
 			} else {
 				i += takeFun(f.substring(i));
+				lastNumRPar = false;
 			}
 		}
 		while(!instStack.isEmpty()){
@@ -368,7 +476,7 @@ public class VM {
 		String s1 = "";
 		if (scanner.hasNext()) {
 			s1 = scanner.next();
-			if(s1.equals(var)){
+			if(s1.equals(var1)){
 				instructions.add(VAR);
 			} else if(s1.equals(var2)){
 				instructions.add(VAR2);
@@ -379,6 +487,24 @@ public class VM {
 					case "sqrt":
 						instStack.push(SQRT);
 						break;
+					case "cosh":
+						instStack.push(COSH);
+						break;
+					case "sinh": case "senh":
+						instStack.push(SENH);
+						break;
+					case "tanh":
+						instStack.push(TANH);
+						break;
+					case "sech":
+						instStack.push(SECH);
+						break;
+					case "csch":
+						instStack.push(CSCH);
+						break;
+					case "coth": case "ctgh":
+						instStack.push(COTH);
+						break;
 					case "cos":
 						instStack.push(COS);
 						break;
@@ -388,6 +514,17 @@ public class VM {
 					case "tan":
 						instStack.push(TAN);
 						break;
+					case "sec":
+						instStack.push(SEC);
+						break;
+					case "csc":
+						instStack.push(CSC);
+						break;
+					case "cot": case "ctg":
+						instStack.push(COT);
+						break;
+					case "ln":
+						instStack.push(LN);
 				}
 			}
 		}
@@ -410,5 +547,23 @@ public class VM {
 
 		scanner.close();
 		return String.valueOf(d);
+	}
+	
+	private static int precedence(byte op){
+		switch(op){
+			/*case SQRT:	case SEN:	case COS:	case TAN:	case SEC:	case CSC:
+			case COT:	case SENH:	case COSH:	case TANH:	case SECH:	case CSCH:
+			case COTH:	case LN:
+				return 6;
+			case POT:
+				return 5;
+			case NEG:
+				return 4;
+			case MULT:	case DIV:
+				return 3;
+			case SUMA:	case RESTA:
+				return 2;*/
+			default: return 0;
+		}
 	}
 }
