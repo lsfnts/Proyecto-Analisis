@@ -6,6 +6,7 @@
 package analisis.gui.mod1;
 
 import analisis.math.Algoritmos;
+import java.io.FileOutputStream;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -64,6 +65,7 @@ public class Modulo1 extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btn_Graphics = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,6 +157,14 @@ public class Modulo1 extends javax.swing.JFrame {
         });
         getContentPane().add(btn_Graphics, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, -1, -1));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,6 +245,11 @@ public class Modulo1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_GraphicsActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //PdfWriter.getInstance(document, new FileOutputStream(seleccionar.getSelectedFile() + ".pdf"));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -274,6 +289,7 @@ public class Modulo1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_EjectuarNewton;
     private javax.swing.JButton btn_Graphics;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
