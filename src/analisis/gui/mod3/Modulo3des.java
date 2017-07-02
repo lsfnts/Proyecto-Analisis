@@ -6,6 +6,13 @@
 package analisis.gui.mod3;
 
 import analisis.math.Algoritmos;
+import analisis.math.VM;
+import de.erichseifert.gral.data.DataTable;
+import de.erichseifert.gral.plots.XYPlot;
+import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
+import de.erichseifert.gral.plots.lines.LineRenderer;
+import de.erichseifert.gral.ui.InteractivePanel;
+import java.awt.Color;
 
 /**
  *
@@ -18,6 +25,9 @@ public class Modulo3des extends javax.swing.JFrame {
      */
     public Modulo3des() {
         initComponents();
+        
+        
+        
     }
 
     /**
@@ -37,6 +47,7 @@ public class Modulo3des extends javax.swing.JFrame {
         txtfunc = new javax.swing.JTextField();
         txtx0 = new javax.swing.JTextField();
         txtresultado = new javax.swing.JTextField();
+        pnlvista = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,14 +68,16 @@ public class Modulo3des extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btncalc)
-                .addGap(28, 28, 28))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtresultado, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtresultado, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btncalc)))
+                        .addGap(28, 28, 28))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -73,8 +86,8 @@ public class Modulo3des extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
                             .addComponent(txtfunc, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(txtx0))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                            .addComponent(txtx0))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,18 +106,28 @@ public class Modulo3des extends javax.swing.JFrame {
                 .addComponent(btncalc)
                 .addGap(34, 34, 34)
                 .addComponent(txtresultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
+
+        pnlvista.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,8 +137,29 @@ public class Modulo3des extends javax.swing.JFrame {
      String func =txtfunc.getText();
      double valorinicial = Double.parseDouble(txtx0.getText());
      String respuesta=Algoritmos.rectasTangentes(func, valorinicial);
-     
-     txtresultado.setText("y ="+respuesta);
+     DataTable data = new DataTable(Double.class, Double.class);
+     DataTable data2 = new DataTable(Double.class, Double.class);
+        for (double x = -5.0; x <= 5.0; x+=0.25) {
+            double y = VM.eval(func,x);
+            data.add(x, y);
+        }
+        for (double x = -10.0; x <= 10.0; x+=1) {
+            double y = Math.cos(x);
+            data2.add(x, y);
+        }
+         XYPlot plot = new XYPlot(data);
+         XYPlot plot2 = new XYPlot(data2);
+          LineRenderer lines = new DefaultLineRenderer2D();
+        Color color = new Color(0.0f, 0.3f, 1.0f);
+       pnlvista.add(new InteractivePanel(plot));
+       pnlvista.add(new InteractivePanel(plot2));
+       pnlvista.revalidate();
+       pnlvista.repaint();
+     txtresultado.setText(respuesta);
+    
+        
+       
+        
       
     }//GEN-LAST:event_btncalcActionPerformed
 
@@ -162,6 +206,7 @@ public class Modulo3des extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblf;
+    private javax.swing.JPanel pnlvista;
     private javax.swing.JTextField txtfunc;
     private javax.swing.JTextField txtresultado;
     private javax.swing.JTextField txtx0;
