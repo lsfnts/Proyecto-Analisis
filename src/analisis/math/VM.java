@@ -158,6 +158,45 @@ public class VM {
 					double t3 = valueStack.pop();
 					valueStack.push(Math.tan(t3));
 					break;
+				case SEC:
+					double t4 = valueStack.pop();
+					valueStack.push(1/Math.cos(t4));
+					break;
+				case CSC:
+					double t5 = valueStack.pop();
+					valueStack.push(1/Math.sin(t5));
+					break;
+				case COT:
+					double t6 = valueStack.pop();
+					valueStack.push(Math.cos(t6)/Math.sin(t6));
+					break;
+				case SENH:
+					double h1 = valueStack.pop();
+					valueStack.push(Math.sinh(h1));
+					break;
+				case COSH:
+					double h2 = valueStack.pop();
+					valueStack.push(Math.cosh(h2));
+					break;
+				case TANH:
+					double h3 = valueStack.pop();
+					valueStack.push(Math.sinh(h3)/Math.cosh(h3));
+					break;
+				case SECH:
+					double h4 = valueStack.pop();
+					valueStack.push(1/Math.cosh(h4));
+					break;
+				case CSCH:
+					double h5 = valueStack.pop();
+					valueStack.push(1/Math.sinh(h5));
+					break;
+				case COTH:
+					double h6 = valueStack.pop();
+					valueStack.push(Math.cosh(h6)/Math.sinh(h6));
+					break;
+				case LN:
+					double b = valueStack.pop();
+					valueStack.push(Math.log(b));
 				//indica que es una variable, guarda en el stack el valor
 				case VAR:
 					valueStack.push(var1Val);
@@ -180,7 +219,7 @@ public class VM {
 	 * @param f 
 	 */
 	private static void prepare(String f){
-		f = f.replaceAll(" ", "");
+		f = f.replaceAll(" ", "").toLowerCase();
 		char c;
 		byte[] b;
 		
@@ -397,6 +436,35 @@ public class VM {
 					case "tan":
 						instStack.push(TAN);
 						break;
+					case "sec":
+						instStack.push(SEC);
+						break;
+					case "csc":
+						instStack.push(CSC);
+						break;
+					case "cot": case "ctg":
+						instStack.push(COT);
+						break;
+					case "cosh":
+						instStack.push(COSH);
+						break;
+					case "sinh": case "senh":
+						instStack.push(SENH);
+						break;
+					case "tanh":
+						instStack.push(TANH);
+						break;
+					case "sech":
+						instStack.push(SECH);
+						break;
+					case "csch":
+						instStack.push(CSCH);
+						break;
+					case "coth": case "ctgh":
+						instStack.push(COTH);
+						break;
+					case "ln":
+						instStack.push(LN);
 				}
 			}
 		}
@@ -423,7 +491,7 @@ public class VM {
 	
 	private static int precedence(byte op){
 		switch(op){
-			case SQRT:	case SEN:	case COS:	case TAN:	case SEC:	case CSC:
+			/*case SQRT:	case SEN:	case COS:	case TAN:	case SEC:	case CSC:
 			case COT:	case SENH:	case COSH:	case TANH:	case SECH:	case CSCH:
 			case COTH:	case LN:
 				return 6;
@@ -434,7 +502,7 @@ public class VM {
 			case MULT:	case DIV:
 				return 3;
 			case SUMA:	case RESTA:
-				return 2;
+				return 2;*/
 			default: return 0;
 		}
 	}
