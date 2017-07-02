@@ -6,6 +6,8 @@
 package analisis.gui;
 
 import analisis.gui.mod4.Modulo4;
+import mod1.Modulo1;
+import analisis.gui.mod3.Modulo3des;
 import analisis.math.VM;
 
 /**
@@ -19,6 +21,7 @@ public class MainMenu extends javax.swing.JFrame {
 	 */
 	public MainMenu() {
 		initComponents();
+                
 	}
 
 	/**
@@ -30,28 +33,33 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnNewton = new javax.swing.JButton();
+        btnABCurva = new javax.swing.JButton();
+        btnRT = new javax.swing.JButton();
+        btnIM = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNewton.setText("Newton Raphson");
+        btnNewton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNewtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        btnABCurva.setText("Área Bajo la Curva");
 
-        jButton3.setText("jButton3");
-
-        jButton4.setText("jButton4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnRT.setText("Rectas Tangentes");
+        btnRT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnRTActionPerformed(evt);
+            }
+        });
+
+        btnIM.setText("Integrales Múltiples");
+        btnIM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIMActionPerformed(evt);
             }
         });
 
@@ -59,40 +67,45 @@ public class MainMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(140, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(164, Short.MAX_VALUE))
+                    .addComponent(btnIM)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnNewton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnABCurva, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
+                .addGap(33, 33, 33)
+                .addComponent(btnNewton)
                 .addGap(38, 38, 38)
-                .addComponent(jButton2)
-                .addGap(35, 35, 35)
-                .addComponent(jButton3)
-                .addGap(52, 52, 52)
-                .addComponent(jButton4)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addComponent(btnABCurva)
+                .addGap(43, 43, 43)
+                .addComponent(btnRT)
+                .addGap(44, 44, 44)
+                .addComponent(btnIM)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnNewtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewtonActionPerformed
+        Modulo1 mod = new Modulo1(); mod.setVisible(true);
+    }//GEN-LAST:event_btnNewtonActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIMActionPerformed
         setContentPane(new Modulo4());
 		revalidate();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnIMActionPerformed
+
+    private void btnRTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTActionPerformed
+        Modulo3des mod3 = new Modulo3des(); mod3.setVisible(true);
+    }//GEN-LAST:event_btnRTActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -130,9 +143,9 @@ public class MainMenu extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnABCurva;
+    private javax.swing.JButton btnIM;
+    private javax.swing.JButton btnNewton;
+    private javax.swing.JButton btnRT;
     // End of variables declaration//GEN-END:variables
 }

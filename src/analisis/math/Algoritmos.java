@@ -126,7 +126,7 @@ public class Algoritmos {
 	}
 	
 		
-	private static double deltaCentral(String fun, double x, double h, int k){
+	public static double deltaCentral(String fun, double x, double h, int k){
 		double deltaY=0;
 		for (int i = 0; i <=k;++i){
 			if(i%2==0){
@@ -172,4 +172,25 @@ public class Algoritmos {
         return (factorialm / (factorialn * factorialmn));
 
 	}
+        public static String rectasTangentes(String funcion, Double valorinicial){
+               double ordenada=(VM.eval(funcion, valorinicial));
+               double pendiente=(derivar(funcion,valorinicial,1));
+               double abcisa= pendiente*(-valorinicial);
+               
+               if(abcisa>0 && pendiente>0){
+                   
+                   return  "y ="+String.valueOf(ordenada)+" + "+String.valueOf(pendiente)+"*X + "+String.valueOf(abcisa);
+               
+               }
+               else if(abcisa>0){
+                    return "y ="+String.valueOf(ordenada)+" "+String.valueOf(pendiente)+"*X + "+String.valueOf(abcisa);
+               }
+               else{
+                    return "y ="+String.valueOf(ordenada)+" + "+String.valueOf(pendiente)+"*X "+String.valueOf(abcisa);
+               } 
+               
+              
+                    
+            
+        }
 }
