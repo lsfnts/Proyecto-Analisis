@@ -4,11 +4,39 @@
  * and open the template in the editor.
  */
 package analisis.math;
+import java.text.DecimalFormat;
 /**
  *
  * @author Luis
  */
 public class Algoritmos {
+    public static DecimalFormat df = new DecimalFormat("#.0000");
+
+    
+    public static String MetodoDeNewton(String funcion, double tolerancia){
+        int iteraciones=0;
+        //String f1="x^2 -4";
+        //String f2="2*x";
+        double pinicial = 1; //p0
+        double pgorro = 0; //p1
+        
+        
+        while(iteraciones<10){
+            pgorro = (pinicial - ((VM.eval(funcion, pinicial))/(derivar(funcion,pinicial,1))));
+            //pgorro = (pinicial - (((Math.pow(pinicial,3))+ (3*pinicial)+1)/((3*(Math.pow(pinicial,2)))+3)));
+            if (Math.abs(pgorro - pinicial)< tolerancia){
+                
+                return df.format(pgorro);
+                //System.out.println("EXITO "+pgorro);
+                
+            }else{
+                iteraciones++;
+                pinicial = pgorro;
+            }
+        }
+        return df.format(pgorro);
+       //System.out.println("fallo  "+pgorro+" iteraciones  "+ iteraciones);
+    }
 	
 	public static double ReglaDeSimpsonDoble(String f, double a, double b, String c, String d){
 		//n=20, m=20
