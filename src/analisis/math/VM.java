@@ -195,8 +195,9 @@ public class VM {
 					valueStack.push(Math.cosh(h6)/Math.sinh(h6));
 					break;
 				case LN:
-					double b = valueStack.pop();
-					valueStack.push(Math.log(b));
+					double a = valueStack.pop();
+					valueStack.push(Math.log(a));
+					break;
 				//indica que es una variable, guarda en el stack el valor
 				case VAR:
 					valueStack.push(var1Val);
@@ -427,24 +428,6 @@ public class VM {
 					case "sqrt":
 						instStack.push(SQRT);
 						break;
-					case "cos":
-						instStack.push(COS);
-						break;
-					case "sin": case "sen":
-						instStack.push(SEN);
-						break;
-					case "tan":
-						instStack.push(TAN);
-						break;
-					case "sec":
-						instStack.push(SEC);
-						break;
-					case "csc":
-						instStack.push(CSC);
-						break;
-					case "cot": case "ctg":
-						instStack.push(COT);
-						break;
 					case "cosh":
 						instStack.push(COSH);
 						break;
@@ -462,6 +445,24 @@ public class VM {
 						break;
 					case "coth": case "ctgh":
 						instStack.push(COTH);
+						break;
+					case "cos":
+						instStack.push(COS);
+						break;
+					case "sin": case "sen":
+						instStack.push(SEN);
+						break;
+					case "tan":
+						instStack.push(TAN);
+						break;
+					case "sec":
+						instStack.push(SEC);
+						break;
+					case "csc":
+						instStack.push(CSC);
+						break;
+					case "cot": case "ctg":
+						instStack.push(COT);
 						break;
 					case "ln":
 						instStack.push(LN);
