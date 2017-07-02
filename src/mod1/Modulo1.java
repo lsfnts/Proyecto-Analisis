@@ -6,18 +6,32 @@
 package mod1;
 
 import analisis.math.Algoritmos;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Franco
  */
 public class Modulo1 extends javax.swing.JFrame {
+    
+    public static DefaultTableModel modelo = new DefaultTableModel();
+     
 
     /**
      * Creates new form NewJFrame
      */
     public Modulo1() {
+        
+        
+        modelo.addColumn("N");
+        modelo.addColumn("P0");
+        modelo.addColumn("P1");
+        modelo.addColumn("Error");
+        
+        
+        
         initComponents();
+        
     }
 
     /**
@@ -38,6 +52,12 @@ public class Modulo1 extends javax.swing.JFrame {
         txt_raizNewton = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table_newton = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        lbl_advertencia = new javax.swing.JLabel();
+        lbl_estado = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,60 +82,105 @@ public class Modulo1 extends javax.swing.JFrame {
 
         jLabel4.setText("Raiz encontrada");
 
+        table_newton.setModel(modelo);
+        jScrollPane1.setViewportView(table_newton);
+
+        jLabel5.setText("METODO DE NEWTON RAPHSON");
+
+        lbl_advertencia.setText("00000");
+
+        lbl_estado.setText("jLabel6");
+
+        jLabel6.setText("Tolerancia por defecto 10^-6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(388, 388, 388)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(112, 112, 112)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(btn_EjectuarNewton))
+                        .addGap(10, 10, 10)
+                        .addComponent(lbl_estado)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_EjectuarNewton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_advertencia)
+                        .addGap(324, 324, 324))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_funcionNewton)
+                            .addComponent(txt_toleranciaNewton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(130, 130, 130))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_funcionNewton, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(txt_toleranciaNewton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_iteracionesNewton))
-                                .addGap(40, 40, 40)
+                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txt_iteracionesNewton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(86, 86, 86)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(txt_raizNewton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                                    .addComponent(txt_raizNewton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_funcionNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_toleranciaNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_iteracionesNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_raizNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btn_EjectuarNewton)
-                .addGap(44, 44, 44))
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_funcionNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_toleranciaNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_iteracionesNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_raizNewton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_EjectuarNewton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_estado)
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_advertencia)
+                        .addGap(66, 66, 66))))
         );
 
         pack();
@@ -126,11 +191,60 @@ public class Modulo1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_funcionNewtonActionPerformed
 
     private void btn_EjectuarNewtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EjectuarNewtonActionPerformed
-        // TODO add your handling code here:
-        String funcion =txt_funcionNewton.getText();
-        double tolerancia = Double.parseDouble(txt_toleranciaNewton.getText());
-        String valor =Algoritmos.MetodoDeNewton(funcion,tolerancia);
-        txt_raizNewton.setText(valor);
+//*****INICIALIZANDO VARIBALES***********************************************    
+        String funcion;
+        String valor;
+        Double tolerancia;
+        Boolean vida = true;
+        
+//*****BORRANDO DATOS DE LA TABLA SI ES QUE EXISTEN*************************************************        
+        int rowCount = modelo.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+//*****************************************************************************************
+
+
+//*****************************************************************************************    
+        while(vida != false){
+        if(txt_funcionNewton.getText().equals("")){
+            lbl_advertencia.setText("Por favor ingrese una funcion");
+            break;   
+        }
+        
+        if(txt_toleranciaNewton.getText().equals("")){
+            tolerancia = 0.000001;
+            
+        } else {
+            tolerancia = Double.parseDouble(txt_toleranciaNewton.getText());
+        }
+        
+        
+        if(tolerancia<=0){   
+            lbl_advertencia.setText("Ingrese una tolerancia valida");
+            break;
+        }
+        
+        
+        
+        funcion =txt_funcionNewton.getText();
+        
+        
+        valor =Algoritmos.MetodoDeNewton(funcion,tolerancia);
+        
+        if( Algoritmos.newton == false){
+            lbl_estado.setText("EL METODO FALLO");
+            txt_raizNewton.setText(valor);
+            txt_iteracionesNewton.setText(""+Algoritmos.iteraciones);
+        }else{
+            lbl_estado.setText("EL METODO TUVO EXITO");
+            txt_raizNewton.setText(valor);
+            txt_iteracionesNewton.setText(""+Algoritmos.iteraciones);
+        }
+        
+        vida=false;
+        }
     }//GEN-LAST:event_btn_EjectuarNewtonActionPerformed
 
     /**
@@ -175,6 +289,12 @@ public class Modulo1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_advertencia;
+    private javax.swing.JLabel lbl_estado;
+    private javax.swing.JTable table_newton;
     private javax.swing.JTextField txt_funcionNewton;
     private javax.swing.JTextField txt_iteracionesNewton;
     private javax.swing.JTextField txt_raizNewton;

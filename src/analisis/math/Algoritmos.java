@@ -5,35 +5,57 @@
  */
 package analisis.math;
 import java.text.DecimalFormat;
+import static mod1.Modulo1.modelo;
 /**
  *
  * @author Luis
  */
 public class Algoritmos {
     public static DecimalFormat df = new DecimalFormat("#.0000");
+    public static boolean newton = false;
+    public static Object []object = new Object[8];
+    public static int iteraciones;
+        
+        
 
     
     public static String MetodoDeNewton(String funcion, double tolerancia){
-        int iteraciones=0;
+        iteraciones=0;
         //String f1="x^2 -4";
         //String f2="2*x";
         double pinicial = 1; //p0
         double pgorro = 0; //p1
+        double error;
         
         
         while(iteraciones<10){
             pgorro = (pinicial - ((VM.eval(funcion, pinicial))/(derivar(funcion,pinicial,1))));
+            error = Math.abs(pgorro - pinicial) ;
             //pgorro = (pinicial - (((Math.pow(pinicial,3))+ (3*pinicial)+1)/((3*(Math.pow(pinicial,2)))+3)));
-            if (Math.abs(pgorro - pinicial)< tolerancia){
+            if (error< tolerancia){
+                iteraciones ++;
+                newton = true;
+                object[0]=iteraciones;
+                object[1]=pinicial;
+                object[2]=pgorro;
+                object[3]=error;
+                modelo.addRow(object);
                 
                 return df.format(pgorro);
                 //System.out.println("EXITO "+pgorro);
                 
             }else{
                 iteraciones++;
+                object[0]=iteraciones;
+                object[1]=pinicial;
+                object[2]=pgorro;
+                object[3]=error;
+                modelo.addRow(object);
                 pinicial = pgorro;
+                
             }
         }
+        newton = false;
         return df.format(pgorro);
        //System.out.println("fallo  "+pgorro+" iteraciones  "+ iteraciones);
     }
