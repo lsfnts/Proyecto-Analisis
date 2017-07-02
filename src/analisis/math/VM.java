@@ -49,9 +49,58 @@ public class VM {
 	private static ArrayDeque<Double> valueStack = new ArrayDeque<>();
 	private static ArrayDeque<Byte> instStack = new ArrayDeque<>();
 	
-	private static String var = "x";
-	private static String var2 = "y";
-	private static String var3 = "z";
+	private static String var1 = "";
+	private static String var2 = "";
+	private static String var3 = "";
+	
+	/**
+	 * 
+	 * @param fun función a evaluar
+	 * @param valX valor de la variable
+	 * @param var1 nombre de la variable variable
+	 * @return 
+	 */
+	public static double eval(String fun, double valX, String var1){
+		VM.var1 = var1;
+		prepare(fun);
+		return evaluar(valX, 0, 0);
+	}
+	
+	/**
+	 * 
+	 * @param fun función a evaluar
+	 * @param valX valor de primera variable
+	 * @param var1 nombre de primera variable
+	 * @param valY valor de segunda variable
+	 * @param var2 nombre de segunda variable
+	 * @return 
+	 */
+	public static double eval(String fun, double valX, String var1, double valY, String var2){
+		VM.var1 = var1;
+		VM.var2 = var2;
+		prepare(fun);
+		return evaluar(valX, valY, 0);
+	}
+	
+	/**
+	 * 
+	 * @param fun función a evaluar
+	 * @param valX valor de primera variable
+	 * @param var1 nombre de primera variable
+	 * @param valY valor de segunda variable
+	 * @param var2 nombre de segunda variable
+	 * @param valZ valor de tercera variable
+	 * @param var3 nombre de tercera variable
+	 * @return 
+	 */
+	public static double eval(String fun, double valX, String var1, double valY,
+			String var2, double valZ, String var3){
+		VM.var1 = var1;
+		VM.var2 = var2;
+		VM.var3 = var3;
+		prepare(fun);
+		return evaluar(valX, valY, valZ);
+	}
 	
 	/**
 	 * 
@@ -60,6 +109,7 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX){
+		resetVar();
 		prepare(fun);
 		return evaluar(valX, 0, 0);
 	}
@@ -72,6 +122,7 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX, double valY){
+		resetVar();
 		prepare(fun);
 		return evaluar(valX, valY, 0);
 	}
@@ -85,9 +136,17 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX, double valY, double valZ){
+		resetVar();
 		prepare(fun);
 		return evaluar(valX, valY, valZ);
 	}
+	
+	private static void resetVar(){
+		VM.var1 = "x";
+		VM.var2 = "y";
+		VM.var3 = "z";
+	}
+	
 	/**
 	 * evalua la expresión guardada y devuelve el resultado
 	 * @param var1Val
@@ -417,7 +476,7 @@ public class VM {
 		String s1 = "";
 		if (scanner.hasNext()) {
 			s1 = scanner.next();
-			if(s1.equals(var)){
+			if(s1.equals(var1)){
 				instructions.add(VAR);
 			} else if(s1.equals(var2)){
 				instructions.add(VAR2);
