@@ -64,13 +64,14 @@ public class Algoritmos {
       
 		
 		/**
+		 * Derivar por diferencias centrales
 		 * 
 		 * @param fun string que representa la funcion
 		 * @param x punto a evaluar
 		 * @param k grado de la derivada
 		 * @return 
 		 */
-	public static double derivarPorDifCentrales(String fun, double x, int k){
+	public static double derivar(String fun, double x, int k){
 		return deltaCentral(fun, x, 0.000001, k)/Math.pow(0.000001, k);
 	}
 	
