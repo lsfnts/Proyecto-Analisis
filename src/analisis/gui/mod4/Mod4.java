@@ -45,11 +45,11 @@ public class Mod4 extends javax.swing.JFrame {
         txtLimMedSup = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtLimMedInf = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        lblLimIntInf = new javax.swing.JLabel();
         txtVar3 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        lblVar3 = new javax.swing.JLabel();
         txtLimIntSup = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        lblLimIntSup = new javax.swing.JLabel();
         txtLimIntInf = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtRes = new javax.swing.JTextField();
@@ -68,6 +68,11 @@ public class Mod4 extends javax.swing.JFrame {
 
         TypeChooser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         TypeChooser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integral Doble", "Integral Triple" }));
+        TypeChooser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TypeChooserActionPerformed(evt);
+            }
+        });
 
         txtVar1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtVar1.setText("x");
@@ -107,21 +112,21 @@ public class Mod4 extends javax.swing.JFrame {
         txtLimMedInf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtLimMedInf.setPreferredSize(new java.awt.Dimension(120, 25));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Limite Inferior");
+        lblLimIntInf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblLimIntInf.setText("Limite Inferior");
 
         txtVar3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtVar3.setText("z");
         txtVar3.setPreferredSize(new java.awt.Dimension(80, 25));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Tercera Variable");
+        lblVar3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblVar3.setText("Tercera Variable");
 
         txtLimIntSup.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtLimIntSup.setPreferredSize(new java.awt.Dimension(120, 25));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Limite Superior");
+        lblLimIntSup.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblLimIntSup.setText("Limite Superior");
 
         txtLimIntInf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtLimIntInf.setPreferredSize(new java.awt.Dimension(120, 25));
@@ -140,8 +145,8 @@ public class Mod4 extends javax.swing.JFrame {
             }
         });
 
-        txtFunc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtFunc.setPreferredSize(new java.awt.Dimension(600, 25));
+        txtFunc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtFunc.setPreferredSize(new java.awt.Dimension(629, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,10 +162,12 @@ public class Mod4 extends javax.swing.JFrame {
                         .addComponent(TypeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addComponent(jLabel10))
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
@@ -192,15 +199,15 @@ public class Mod4 extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
+                                        .addComponent(lblLimIntInf)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtLimIntInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
+                                        .addComponent(lblLimIntSup)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtLimIntSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
+                                        .addComponent(lblVar3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtVar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
@@ -209,11 +216,6 @@ public class Mod4 extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(txtRes, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(149, 149, 149)
-                    .addComponent(txtFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(22, 22, 22)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,21 +225,23 @@ public class Mod4 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(TypeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addComponent(jLabel10)
-                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtVar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addComponent(lblVar3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtLimIntSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
+                            .addComponent(lblLimIntSup))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtLimIntInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
+                            .addComponent(lblLimIntInf)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -267,13 +271,15 @@ public class Mod4 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButCalc)
                     .addComponent(txtRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(180, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(123, 123, 123)
-                    .addComponent(txtFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(352, Short.MAX_VALUE)))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
+
+        lblLimIntInf.setVisible(false);
+        txtVar3.setVisible(false);
+        lblVar3.setVisible(false);
+        txtLimIntSup.setVisible(false);
+        lblLimIntSup.setVisible(false);
+        txtLimIntInf.setVisible(false);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -306,6 +312,27 @@ public class Mod4 extends javax.swing.JFrame {
 			txtRes.setText("Error en datos ingresados");
 		}
     }//GEN-LAST:event_ButCalcActionPerformed
+
+    private void TypeChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeChooserActionPerformed
+        switch(TypeChooser.getSelectedIndex()){
+			case 0:
+				txtLimIntInf.setVisible(false);
+				txtLimIntSup.setVisible(false);
+				txtVar3.setVisible(false);
+				lblLimIntInf.setVisible(false);
+				lblLimIntSup.setVisible(false);
+				lblVar3.setVisible(false);
+				break;
+			case 1:
+				txtLimIntInf.setVisible(true);
+				txtLimIntSup.setVisible(true);
+				txtVar3.setVisible(true);
+				lblLimIntInf.setVisible(true);
+				lblLimIntSup.setVisible(true);
+				lblVar3.setVisible(true);
+				break;
+		}
+    }//GEN-LAST:event_TypeChooserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,10 +379,10 @@ public class Mod4 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jreturn;
+    private javax.swing.JLabel lblLimIntInf;
+    private javax.swing.JLabel lblLimIntSup;
+    private javax.swing.JLabel lblVar3;
     private javax.swing.JTextField txtFunc;
     private javax.swing.JTextField txtLimExtInf;
     private javax.swing.JTextField txtLimExtSup;
