@@ -29,11 +29,14 @@ public class Modulo1 extends javax.swing.JFrame {
      */
     public Modulo1() {
         
-        
-        modelo.addColumn("N");
+        if(Algoritmos.abierto==false){
+            modelo.addColumn("N");
         modelo.addColumn("P0");
         modelo.addColumn("P1");
         modelo.addColumn("Error");
+        }
+        Algoritmos.abierto=true;
+        
         
         
         

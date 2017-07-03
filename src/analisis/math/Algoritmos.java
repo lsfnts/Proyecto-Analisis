@@ -17,6 +17,7 @@ public class Algoritmos {
     public static Object []object = new Object[8];
     public static int iteraciones;
     public static Double[] apr;
+    public static boolean abierto =false;
         
         
 
