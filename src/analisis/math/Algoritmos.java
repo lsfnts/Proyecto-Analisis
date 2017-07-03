@@ -265,24 +265,7 @@ public class Algoritmos {
                } 
 
         }
-		
-	public static double pow(double x, int n){
-		if(n < 0){
-			x = 1 / x;
-			n = -n;
-		}
-		if(n == 0) return 1;
-		double y = 1;
-		while(n > 1){
-		 if (n%2 == 0){ 
-			x = x * x;
-			n = n / 2;
-		 } else{
-			y = x * y;
-			x = x * x;
-			n = (n - 1) / 2;
-		 }
-		}
-		return x * y;
-	}
+	
+	
+	static public final double PI = 3.1415926535897932;
 }
