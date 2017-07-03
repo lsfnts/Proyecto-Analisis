@@ -227,6 +227,7 @@ public class Mod2 extends javax.swing.JFrame {
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         // TODO add your handling code here:
+        gPanel.removeAll();
         String func =function.getText();
         String var=variable.getText();
         String var1=varA.getText();
