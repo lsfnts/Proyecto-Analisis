@@ -5,6 +5,8 @@
  */
 package analisis.gui.mod4;
 
+import analisis.gui.MainMenu;
+import analisis.gui.mod2.Mod2;
 import analisis.math.Algoritmos;
 import analisis.math.VM;
 import de.erichseifert.gral.data.DataTable;
@@ -33,6 +35,7 @@ public class Modulo4 extends javax.swing.JPanel {
 
         integralTButton = new javax.swing.JToggleButton();
         jTextField1 = new javax.swing.JTextField();
+        btnreturn = new javax.swing.JButton();
 
         integralTButton.setText("jToggleButton1");
         integralTButton.addActionListener(new java.awt.event.ActionListener() {
@@ -42,6 +45,13 @@ public class Modulo4 extends javax.swing.JPanel {
         });
 
         jTextField1.setText("jTextField1");
+
+        btnreturn.setText("jButton1");
+        btnreturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreturnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,13 +64,18 @@ public class Modulo4 extends javax.swing.JPanel {
                         .addComponent(integralTButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnreturn)))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(125, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnreturn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
                 .addComponent(integralTButton)
@@ -74,10 +89,47 @@ public class Modulo4 extends javax.swing.JPanel {
 		jTextField1.setText(Double.toString(Algoritmos.deltaCentral(fun, 3, 1,6)));
     }//GEN-LAST:event_integralTButtonActionPerformed
 
+    private void btnreturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreturnActionPerformed
+        // TODO add your handling code here:
+        MainMenu menu=new MainMenu();menu.setVisible(true);this.setVisible(false);
+    }//GEN-LAST:event_btnreturnActionPerformed
+
 	private DataTable data;
+            public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Mod2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Mod2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Mod2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Mod2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Modulo4().setVisible(true);
+            }
+        });
+    }
 	
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnreturn;
     private javax.swing.JToggleButton integralTButton;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

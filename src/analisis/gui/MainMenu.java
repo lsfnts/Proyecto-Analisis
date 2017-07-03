@@ -7,6 +7,7 @@ package analisis.gui;
 
 import analisis.gui.mod4.Modulo4;
 import analisis.gui.mod1.Modulo1;
+import analisis.gui.mod2.Mod2;
 import analisis.gui.mod3.Modulo3des;
 import analisis.math.VM;
 
@@ -39,6 +40,7 @@ public class MainMenu extends javax.swing.JFrame {
         btnIM = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btnNewton.setText("Newton Raphson");
         btnNewton.addActionListener(new java.awt.event.ActionListener() {
@@ -48,6 +50,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnABCurva.setText("Área Bajo la Curva");
+        btnABCurva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnABCurvaActionPerformed(evt);
+            }
+        });
 
         btnRT.setText("Rectas Tangentes");
         btnRT.addActionListener(new java.awt.event.ActionListener() {
@@ -86,26 +93,32 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(btnABCurva)
                 .addGap(43, 43, 43)
                 .addComponent(btnRT)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(btnIM)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewtonActionPerformed
-        Modulo1 mod = new Modulo1(); mod.setVisible(true);
+        Modulo1 mod = new Modulo1(); mod.setVisible(true);this.setVisible(false);
     }//GEN-LAST:event_btnNewtonActionPerformed
 
     private void btnIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIMActionPerformed
-        setContentPane(new Modulo4());
-		revalidate();
+        Modulo4 mod4=new Modulo4();
+        mod4.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnIMActionPerformed
 
     private void btnRTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTActionPerformed
-        Modulo3des mod3 = new Modulo3des(); mod3.setVisible(true);
+        Modulo3des mod3 = new Modulo3des(); mod3.setVisible(true);this.setVisible(false);
     }//GEN-LAST:event_btnRTActionPerformed
+
+    private void btnABCurvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnABCurvaActionPerformed
+        // TODO add your handling code here:
+        Mod2 mod2=new Mod2();mod2.setVisible(true);this.setVisible(false);
+    }//GEN-LAST:event_btnABCurvaActionPerformed
 
 	/**
 	 * @param args the command line arguments
