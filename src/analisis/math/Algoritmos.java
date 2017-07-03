@@ -60,6 +60,52 @@ public class Algoritmos {
        //System.out.println("fallo  "+pgorro+" iteraciones  "+ iteraciones);
     }
 	
+	public static double ReglaDeSimpsonTriple(String f, double a, double b, String c, String d, String s, String t){
+		//n=10, m=10, p=0
+		double h = (b-a)/20;
+		double J1=0, J2=0, J3=0;
+		
+		for(int i = 0; i <= 20; ++i){
+			double x = a+(i*h);
+			double Cx = VM.eval(c, x);
+			double Dx = VM.eval(d, x);
+			double HX = (Dx-Cx)/20;
+			
+			double K1 =0, K2 = 0, K3 = 0;
+			
+			for(int j = 0; j <= 20; ++j){
+				double y = Cx + j*HX;
+				double Sx = VM.eval(s, x, y);
+				double Tx = VM.eval(t, x, y);
+				double HY = (Tx-Sx)/20;
+				
+				double S1 = VM.eval(f, x, Cx, Sx) + VM.eval(f, x, Dx, Tx);
+				double S2 = 0, S3 = 0;
+				
+				for(int k = 0; k < 20; ++k){
+					double z = Sx + k*HY;
+					double R = VM.eval(f, x, y, z);
+					
+					if(k%2 == 0) S2 += R;
+					else S3 += R;
+				}
+				
+				double Q = (S1 + 2*S2 + 4*S3)*HY/3;;
+				if(i == 0 || i == 20) K1 += Q;
+				else if(j%2 == 0) K2 += Q;
+				else K3 += Q;
+			}
+			
+			double L = (K1 + 2*K2 + 4*K3)*HX/3;
+			
+			if(i == 0 || i == 20) J1 += L;
+			else if (i % 2 == 0) J2 += L;
+			else J3 += L;
+		}
+		
+		return h*(J1 + 2*J2 + 4*J3)/3;
+	}
+	
 	public static double ReglaDeSimpsonDoble(String f, double a, double b, String c, String d){
 		//n=20, m=20
 		double h = (b-a)/20;
@@ -74,7 +120,7 @@ public class Algoritmos {
 			double K1 = VM.eval(f, x, Cx) + VM.eval(f, x, Dx);
 			double K2 = 0, K3 = 0;
 			
-			for(int j = 0; j <= 19; ++j){
+			for(int j = 1; j < 20; ++j){
 				double y = Cx + j*HX;
 				double Q = VM.eval(f, x, y);
 				
