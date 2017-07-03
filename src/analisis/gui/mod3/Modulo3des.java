@@ -7,6 +7,7 @@ package analisis.gui.mod3;
 
 import analisis.gui.MainMenu;
 import analisis.math.Algoritmos;
+import analisis.math.InvalidInput;
 import analisis.math.VM;
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.plots.XYPlot;
@@ -14,6 +15,8 @@ import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -70,6 +73,8 @@ public class Modulo3des extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Recta Tangente");
+
+        txtresultado.setEditable(false);
 
         btnreturn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnreturn.setText("Volver");
@@ -181,27 +186,62 @@ public class Modulo3des extends javax.swing.JFrame {
     private void btncalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcActionPerformed
      pnlvista.removeAll();
      String func =txtfunc.getText();
-     double valorinicial = Double.parseDouble(txtx0.getText());
-     double rango = Double.parseDouble(txtrango.getText());
-     double avance = Double.parseDouble(txtavance.getText());
-     String respuesta=Algoritmos.rectasTangentes(func, valorinicial);
+     
+     String respuesta="";
+    //validar campos en blanco 
+     if(VM.isBlank(func) || VM.isBlank(txtx0.getText()) || VM.isBlank(txtrango.getText()) || VM.isBlank(txtavance.getText()) ){
+             txtresultado.setText("No dejes espacios vacios");
+     }
+     else{
+         double valorinicial = Double.parseDouble(txtx0.getText());
+            double rango = Double.parseDouble(txtrango.getText());
+            double avance = Double.parseDouble(txtavance.getText());
+            if(rango>=avance){
+         try {
+            respuesta = Algoritmos.rectasTangentes(func, valorinicial);
+        } catch (InvalidInput ex) {
+            Logger.getLogger(Modulo3des.class.getName()).log(Level.SEVERE, null, ex);
+        }
      DataTable data = new DataTable(Double.class, Double.class);
      DataTable data2 = new DataTable(Double.class, Double.class);
-     double y, y2;        for (double x = -rango; x <= rango; x+=avance) {
-            y = VM.eval(func,x);
+     double y=0.0, y2=0.0;
+
+     for (double x = -rango; x <= rango; x+=avance) {
+         try {
+             y = VM.eval(func,x);
+         } catch (InvalidInput ex) {
+             Logger.getLogger(Modulo3des.class.getName()).log(Level.SEVERE, null, ex);
+         }
             data.add(x, y);
         }
         for (double x = -rango; x <= rango; x+=avance) {
-            y = VM.eval(respuesta,x);
-            data2.add(x, y);
+         try {
+             
+             y2 = VM.eval(respuesta,x);
+         } catch (InvalidInput ex) {
+             Logger.getLogger(Modulo3des.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            data2.add(x, y2);
         }
          XYPlot plot = new XYPlot(data,data2);
          LineRenderer lines = new DefaultLineRenderer2D();
+         plot.setLineRenderer(data, lines);
+         LineRenderer lines2 = new DefaultLineRenderer2D();
+         plot.setLineRenderer(data2, lines2);
         Color color = new Color(0.0f, 0.3f, 1.0f);
+        plot.getPointRenderer(data).setColor(color);
+        plot.getLineRenderer(data).setColor(color);
        pnlvista.add(new InteractivePanel(plot));
        pnlvista.revalidate();
        pnlvista.repaint();
      txtresultado.setText("y ="+respuesta);
+     }
+            else{
+                txtresultado.setText("El rango debe ser mayor al avance");
+            }
+     }
+     
+        
     
         
        

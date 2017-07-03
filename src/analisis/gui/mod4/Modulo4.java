@@ -8,8 +8,11 @@ package analisis.gui.mod4;
 import analisis.gui.MainMenu;
 import analisis.gui.mod2.Mod2;
 import analisis.math.Algoritmos;
+import analisis.math.InvalidInput;
 import analisis.math.VM;
 import de.erichseifert.gral.data.DataTable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -86,7 +89,10 @@ public class Modulo4 extends javax.swing.JPanel {
     private void integralTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_integralTButtonActionPerformed
         String fun = jTextField1.getText();
 		
-		jTextField1.setText(Double.toString(Algoritmos.deltaCentral(fun, 3, 1,6)));
+		try{jTextField1.setText(Double.toString(Algoritmos.deltaCentral(fun, 3, 1,6)));}
+                catch (InvalidInput ex) {
+                Logger.getLogger(Modulo4.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_integralTButtonActionPerformed
 
     private void btnreturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreturnActionPerformed

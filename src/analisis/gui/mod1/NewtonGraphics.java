@@ -10,6 +10,7 @@ package analisis.gui.mod1;
  * @author Franco
  */
 import analisis.math.Algoritmos;
+import analisis.math.InvalidInput;
 import analisis.math.VM;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -22,7 +23,7 @@ import de.erichseifert.gral.ui.InteractivePanel;
 
 
 public class NewtonGraphics extends JFrame {
-    public NewtonGraphics() {
+    public NewtonGraphics() throws InvalidInput {
         
         setSize(600, 400);
 

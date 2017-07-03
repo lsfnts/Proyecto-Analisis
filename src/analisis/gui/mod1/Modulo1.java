@@ -7,7 +7,10 @@ package analisis.gui.mod1;
 
 import analisis.gui.MainMenu;
 import analisis.math.Algoritmos;
+import analisis.math.InvalidInput;
 import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -242,7 +245,8 @@ public class Modulo1 extends javax.swing.JFrame {
         funcion =txt_funcionNewton.getText();
         
         
-        valor =Algoritmos.MetodoDeNewton(funcion,tolerancia,iterations);
+        try{
+            valor =Algoritmos.MetodoDeNewton(funcion,tolerancia,iterations);
         
         if( Algoritmos.newton == false){
             lbl_estado.setText("EL METODO FALLO");
@@ -255,7 +259,11 @@ public class Modulo1 extends javax.swing.JFrame {
         }
         
         vida=false;
-        }
+        }   catch (InvalidInput ex) {
+                Logger.getLogger(Modulo1.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }   
+       
     }//GEN-LAST:event_btn_EjectuarNewtonActionPerformed
 
     private void btn_GraphicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GraphicsActionPerformed
@@ -270,7 +278,12 @@ public class Modulo1 extends javax.swing.JFrame {
         }
         }
         
-        NewtonGraphics graficaNewton= new NewtonGraphics();
+        NewtonGraphics graficaNewton = null;
+        try {
+            graficaNewton = new NewtonGraphics();
+        } catch (InvalidInput ex) {
+            Logger.getLogger(Modulo1.class.getName()).log(Level.SEVERE, null, ex);
+        }
         graficaNewton.setVisible(true);
         
     }//GEN-LAST:event_btn_GraphicsActionPerformed

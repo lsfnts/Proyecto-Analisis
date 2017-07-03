@@ -7,6 +7,7 @@ package analisis.gui.mod2;
 
 import analisis.gui.MainMenu;
 import analisis.math.Algoritmos;
+import analisis.math.InvalidInput;
 import analisis.math.VM;
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.plots.XYPlot;
@@ -14,6 +15,8 @@ import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -236,15 +239,26 @@ public class Mod2 extends javax.swing.JFrame {
         String var2=varB.getText();
         Double inter1=Double.parseDouble(var1);
         Double inter2=Double.parseDouble(var2);
-        Double answer=Algoritmos.ReglaDeSimpsonSimple(func,inter1,inter2);
+        Double answer=0.0;
+        try {
+            answer = Algoritmos.ReglaDeSimpsonSimple(func,inter1,inter2,"nose");
+        } catch (InvalidInput ex) {
+            Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
+        }
         DataTable data = new DataTable(Double.class, Double.class);
      DataTable data2 = new DataTable(Double.class, Double.class);
+     double y=0;
         for (double x = -5.0; x <= 5.0; x+=0.25) {
-            double y = VM.eval(func,x);
+            
+            try {
+                y = VM.eval(func,x);
+            } catch (InvalidInput ex) {
+                Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
+            }
             data.add(x, y);
         }
         for (double x = -10.0; x <= 10.0; x+=1) {
-            double y = Math.cos(x);
+            y = Math.cos(x);
             data2.add(x, y);
         }
          XYPlot plot = new XYPlot(data);

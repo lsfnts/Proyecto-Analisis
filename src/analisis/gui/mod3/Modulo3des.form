@@ -167,6 +167,9 @@
         <Component class="javax.swing.JTextField" name="txtx0">
         </Component>
         <Component class="javax.swing.JTextField" name="txtresultado">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnreturn">
           <Properties>
