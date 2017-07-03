@@ -11,7 +11,7 @@ import static analisis.gui.mod1.Modulo1.modelo;
  * @author Luis
  */
 public class Algoritmos {
-    public static DecimalFormat df = new DecimalFormat("#.0000");
+    public static DecimalFormat df = new DecimalFormat("#.000000");
     public static boolean newton = false;
     public static double raiz;
     public static Object []object = new Object[8];

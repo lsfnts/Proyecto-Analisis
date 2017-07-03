@@ -8,6 +8,7 @@ package analisis.gui.mod1;
 import analisis.gui.MainMenu;
 import analisis.math.Algoritmos;
 import analisis.math.InvalidInput;
+import analisis.math.VM;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -224,7 +225,12 @@ public class Modulo1 extends javax.swing.JFrame {
             tolerancia = 0.000001;
             
         } else {
-            tolerancia = Double.parseDouble(txt_toleranciaNewton.getText());
+			tolerancia=0.0;
+			try {
+				tolerancia = VM.eval(txt_toleranciaNewton.getText(),0);
+			} catch (InvalidInput ex) {
+				Logger.getLogger(Modulo1.class.getName()).log(Level.SEVERE, null, ex);
+			}
         }
         
         
