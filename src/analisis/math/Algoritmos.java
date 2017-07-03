@@ -149,7 +149,7 @@ public class Algoritmos {
 		return h*(J1 + 2*J2 + 4*J3)/3;
 	}
 	
-	public static double ReglaDeSimpsonSimple(String f, double a, double b){
+	public static double ReglaDeSimpsonSimple(String f, double a, double b, String var){
 		//n=10
 		double h = (b-a)/20;
 		double K1=0, K2=0, K3=0;
@@ -160,8 +160,8 @@ public class Algoritmos {
 			x = a+(i*h);
 			
 			
-			if(i == 0 || i == 20) K1 += VM.eval(f, x);
-			else if (i % 2 == 0) K2 += VM.eval(f, x);
+			if(i == 0 || i == 20) K1 += VM.eval(f, x, var);
+			else if (i % 2 == 0) K2 += VM.eval(f, x, var);
 			else K3 += VM.eval(f, x);
 		}
 		
