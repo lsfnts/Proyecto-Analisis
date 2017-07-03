@@ -267,6 +267,12 @@ public class Algoritmos {
 
         }
 	
-	
+	public static double area(String fun, double a, double b, String var) throws InvalidInput{
+		double raiz = Double.valueOf(MetodoDeNewton(fun, 0.000004, 20));
+		if(Integer.signum((Double.compare(raiz, a)*Double.compare(raiz, b))) < 0){
+			return Math.abs(ReglaDeSimpsonSimple(fun, a, raiz, var))+ Math.abs(ReglaDeSimpsonSimple(fun, raiz, b, var));
+		} else return Math.abs(ReglaDeSimpsonSimple(fun, a, raiz, var));
+	}
+		
 	static public final double PI = 3.1415926535897932;
 }
