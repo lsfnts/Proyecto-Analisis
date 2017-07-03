@@ -9,6 +9,7 @@ import analisis.gui.mod4.Modulo4;
 import analisis.gui.mod1.Modulo1;
 import analisis.gui.mod2.Mod2;
 import analisis.gui.mod3.Modulo3des;
+import analisis.gui.mod4.Mod4;
 import analisis.math.VM;
 
 /**
@@ -106,8 +107,7 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewtonActionPerformed
 
     private void btnIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIMActionPerformed
-        setContentPane(new Modulo4());
-		revalidate();
+        Mod4 mod4=new Mod4();mod4.setVisible(true);this.setVisible(false);
     }//GEN-LAST:event_btnIMActionPerformed
 
     private void btnRTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTActionPerformed
