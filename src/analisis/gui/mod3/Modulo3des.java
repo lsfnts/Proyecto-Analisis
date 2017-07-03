@@ -67,8 +67,8 @@ public class Modulo3des extends javax.swing.JFrame {
 
         jLabel2.setText("Recta Tangente");
 
-        btnreturn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnreturn.setText("Calcular");
+        btnreturn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnreturn.setText("Volver");
         btnreturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnreturnActionPerformed(evt);
@@ -103,7 +103,7 @@ public class Modulo3des extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtfunc, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                     .addComponent(txtx0))
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap(515, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +145,7 @@ public class Modulo3des extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         pack();

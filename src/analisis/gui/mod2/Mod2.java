@@ -105,7 +105,7 @@ public class Mod2 extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         back.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        back.setText("Regresal al menu");
+        back.setText("Volver");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);

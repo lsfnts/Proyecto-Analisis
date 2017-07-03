@@ -46,7 +46,7 @@ public class Modulo4 extends javax.swing.JPanel {
 
         jTextField1.setText("jTextField1");
 
-        btnreturn.setText("jButton1");
+        btnreturn.setText("Volver");
         btnreturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnreturnActionPerformed(evt);

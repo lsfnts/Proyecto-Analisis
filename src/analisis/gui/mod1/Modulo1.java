@@ -5,6 +5,7 @@
  */
 package analisis.gui.mod1;
 
+import analisis.gui.MainMenu;
 import analisis.math.Algoritmos;
 import java.io.FileOutputStream;
 import javax.swing.table.DefaultTableModel;
@@ -68,8 +69,11 @@ public class Modulo1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         txt_iterations = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jreturn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(990, 650));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_funcionNewton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +100,7 @@ public class Modulo1 extends javax.swing.JFrame {
                 btn_EjectuarNewtonActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_EjectuarNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
+        getContentPane().add(btn_EjectuarNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, -1, -1));
         getContentPane().add(txt_iteracionesNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 85, -1));
         getContentPane().add(txt_raizNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 108, -1));
 
@@ -173,6 +177,15 @@ public class Modulo1 extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel11.setText("Iteraciones:");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        jreturn.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jreturn.setText("Volver");
+        jreturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jreturnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -267,6 +280,11 @@ public class Modulo1 extends javax.swing.JFrame {
         //PdfWriter.getInstance(document, new FileOutputStream(seleccionar.getSelectedFile() + ".pdf"));
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jreturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jreturnActionPerformed
+        // TODO add your handling code here:
+        MainMenu menu=new MainMenu();menu.setVisible(true);this.setVisible(false);
+    }//GEN-LAST:event_jreturnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -319,6 +337,7 @@ public class Modulo1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jreturn;
     private javax.swing.JLabel lbl_advertencia;
     private javax.swing.JLabel lbl_estado;
     private javax.swing.JTable table_newton;
