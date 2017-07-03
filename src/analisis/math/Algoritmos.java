@@ -13,23 +13,32 @@ import static analisis.gui.mod1.Modulo1.modelo;
 public class Algoritmos {
     public static DecimalFormat df = new DecimalFormat("#.0000");
     public static boolean newton = false;
+    public static double raiz;
     public static Object []object = new Object[8];
     public static int iteraciones;
+    public static Double[] apr;
         
         
 
     
-    public static String MetodoDeNewton(String funcion, double tolerancia){
+    public static String MetodoDeNewton(String funcion, double tolerancia, int iterations){
         iteraciones=0;
-        //String f1="x^2 -4";
-        //String f2="2*x";
         double pinicial = 1; //p0
         double pgorro = 0; //p1
         double error;
+        int t=200;
+        int s=1;
+        apr = new Double[t];
+        apr[0]=pinicial;
         
         
-        while(iteraciones<10){
+        while(iteraciones<iterations){
+            
             pgorro = (pinicial - ((VM.eval(funcion, pinicial))/(derivar(funcion,pinicial,1))));
+            apr[s]=pgorro;
+            s++;
+            
+      
             error = Math.abs(pgorro - pinicial) ;
             //pgorro = (pinicial - (((Math.pow(pinicial,3))+ (3*pinicial)+1)/((3*(Math.pow(pinicial,2)))+3)));
             if (error< tolerancia){
@@ -40,6 +49,7 @@ public class Algoritmos {
                 object[2]=pgorro;
                 object[3]=error;
                 modelo.addRow(object);
+                raiz=pgorro;
                 
                 return df.format(pgorro);
                 //System.out.println("EXITO "+pgorro);
@@ -55,6 +65,7 @@ public class Algoritmos {
                 
             }
         }
+        
         newton = false;
         return df.format(pgorro);
        //System.out.println("fallo  "+pgorro+" iteraciones  "+ iteraciones);

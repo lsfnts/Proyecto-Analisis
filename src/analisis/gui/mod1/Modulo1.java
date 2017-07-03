@@ -66,6 +66,8 @@ public class Modulo1 extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btn_Graphics = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txt_iterations = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,8 +77,8 @@ public class Modulo1 extends javax.swing.JFrame {
                 txt_funcionNewtonActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_funcionNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 102, 135, -1));
-        getContentPane().add(txt_toleranciaNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 142, 135, -1));
+        getContentPane().add(txt_funcionNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 102, 140, -1));
+        getContentPane().add(txt_toleranciaNewton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 140, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel1.setText("Funcion f(x):");
@@ -84,7 +86,7 @@ public class Modulo1 extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel2.setText("Tolerancia:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 146, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         btn_EjectuarNewton.setBackground(new java.awt.Color(255, 0, 51));
         btn_EjectuarNewton.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -126,7 +128,7 @@ public class Modulo1 extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel6.setText("Tolerancia por defecto 10^-6");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 182, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 0, 0));
@@ -136,7 +138,7 @@ public class Modulo1 extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 204));
         jLabel8.setText("Resultados:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 255));
@@ -145,7 +147,7 @@ public class Modulo1 extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jLabel10.setText("Estado:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
         btn_Graphics.setBackground(new java.awt.Color(255, 0, 51));
         btn_Graphics.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -157,13 +159,20 @@ public class Modulo1 extends javax.swing.JFrame {
         });
         getContentPane().add(btn_Graphics, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, -1, -1));
 
-        jButton1.setText("jButton1");
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jButton1.setText("Generar PDF");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 560, -1, -1));
+        getContentPane().add(txt_iterations, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 140, -1));
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jLabel11.setText("Iteraciones:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -177,6 +186,7 @@ public class Modulo1 extends javax.swing.JFrame {
         String valor;
         Double tolerancia;
         Boolean vida = true;
+        int iterations=0;
         
 //*****BORRANDO DATOS DE LA TABLA SI ES QUE EXISTEN*************************************************        
         int rowCount = modelo.getRowCount();
@@ -207,12 +217,19 @@ public class Modulo1 extends javax.swing.JFrame {
             break;
         }
         
+        if(txt_iterations.getText().equals("")){
+            lbl_advertencia.setText("Ingrese el numero de iteraciones");
+            break;
+        }else{
+            iterations = Integer.parseInt(txt_iterations.getText());
+        }
+        
         
         
         funcion =txt_funcionNewton.getText();
         
         
-        valor =Algoritmos.MetodoDeNewton(funcion,tolerancia);
+        valor =Algoritmos.MetodoDeNewton(funcion,tolerancia,iterations);
         
         if( Algoritmos.newton == false){
             lbl_estado.setText("EL METODO FALLO");
@@ -292,6 +309,7 @@ public class Modulo1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -306,6 +324,7 @@ public class Modulo1 extends javax.swing.JFrame {
     private javax.swing.JTable table_newton;
     private javax.swing.JTextField txt_funcionNewton;
     private javax.swing.JTextField txt_iteracionesNewton;
+    private javax.swing.JTextField txt_iterations;
     private javax.swing.JTextField txt_raizNewton;
     private javax.swing.JTextField txt_toleranciaNewton;
     // End of variables declaration//GEN-END:variables
