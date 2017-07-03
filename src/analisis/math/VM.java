@@ -552,7 +552,7 @@ public class VM {
 	
 	private static int precedence(byte op){
 		switch(op){
-			/*case SQRT:	case SEN:	case COS:	case TAN:	case SEC:	case CSC:
+			case SQRT:	case SEN:	case COS:	case TAN:	case SEC:	case CSC:
 			case COT:	case SENH:	case COSH:	case TANH:	case SECH:	case CSCH:
 			case COTH:	case LN:
 				return 6;
@@ -563,7 +563,7 @@ public class VM {
 			case MULT:	case DIV:
 				return 3;
 			case SUMA:	case RESTA:
-				return 2;*/
+				return 2;
 			default: return 0;
 		}
 	}
