@@ -42,7 +42,8 @@ public class VM {
 			VAR = 0x16,
 			VAR2 = 0x17,
 			VAR3 = 0x18,
-			NEG = 0x19;
+			NEG = 0x19,
+			PI = 0x1A;
 			
     
     private static ArrayDeque<Byte> instructions = new ArrayDeque<>();
@@ -197,8 +198,8 @@ public class VM {
 				case POT:
 					double exp = valueStack.pop();
 					double base = valueStack.pop();
-					//if(exp%1 == 0) valueStack.push(Algoritmos.pow(base, (int) exp));
-					/*else*/ valueStack.push(Math.pow(base, exp));
+					if(exp%1 == 0) valueStack.push(Algoritmos.intPow(base, (int) exp));
+					else valueStack.push(Math.pow(base, exp));
 					break;
 				case SQRT:
 					double rad = valueStack.pop();
@@ -256,6 +257,8 @@ public class VM {
 					double a = valueStack.pop();
 					valueStack.push(Math.log(a));
 					break;
+				case PI:
+					valueStack.push(Algoritmos.PI);
 				//indica que es una variable, guarda en el stack el valor
 				case VAR:
 					valueStack.push(var1Val);
@@ -306,13 +309,13 @@ public class VM {
 						lastNumRPar = false;
 						break;
 					case ')':
-						while(instStack.peek() != L_PAR) {
+						while(!instStack.isEmpty() && instStack.peek() != L_PAR) {
 							instructions.add(instStack.pop());
 						}
-						if(instStack.peek() >= SQRT){
+						if(!instStack.isEmpty() && instStack.peek() == L_PAR) instStack.removeFirst();
+						if(!instStack.isEmpty() && precedence(instStack.peek()) >= 6){
 							instructions.add(instStack.pop());
 						}
-						instStack.removeFirst();
 						lastNumRPar = true;
 						break;
 					case '+':
@@ -514,6 +517,8 @@ public class VM {
 				case "ln":
 					instStack.push(LN);
 					break;
+				case "pi": case "PI":
+					instructions.push(PI);
 				default:
 					if(s1.equals(var1)){
 						instructions.add(VAR);
