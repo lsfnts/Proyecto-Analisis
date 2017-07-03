@@ -8,6 +8,7 @@ package analisis.gui.mod3;
 import analisis.gui.MainMenu;
 import analisis.math.Algoritmos;
 import analisis.math.InvalidInput;
+import analisis.math.PDF;
 import analisis.math.VM;
 import de.erichseifert.gral.data.DataTable;
 import de.erichseifert.gral.plots.XYPlot;
@@ -15,8 +16,10 @@ import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -57,6 +60,7 @@ public class Modulo3des extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtrango = new javax.swing.JTextField();
         txtavance = new javax.swing.JTextField();
+        btnpdf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -142,32 +146,42 @@ public class Modulo3des extends javax.swing.JFrame {
 
         jLabel4.setText("Avance de grafica(opcional)");
 
+        btnpdf.setText("Generar Pdf");
+        btnpdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpdfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
                 .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtavance, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(txtrango))
-                .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtavance, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addComponent(txtrango))
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnpdf)
+                        .addGap(113, 113, 113))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -176,8 +190,13 @@ public class Modulo3des extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtavance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 19, Short.MAX_VALUE))
+                            .addComponent(txtavance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
+                        .addComponent(btnpdf))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,6 +273,34 @@ public class Modulo3des extends javax.swing.JFrame {
         MainMenu menu=new MainMenu();menu.setVisible(true);menu.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_btnreturnActionPerformed
 
+    private void btnpdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpdfActionPerformed
+
+        String func =txtfunc.getText();
+        String respuesta="";
+        if(VM.isBlank(func) || VM.isBlank(txtx0.getText()) || VM.isBlank(txtrango.getText()) || VM.isBlank(txtavance.getText()) ){
+            txtresultado.setText("No dejes espacios vacios");
+        }
+        else{
+            String valorinicial = txtx0.getText();
+            String rango = txtrango.getText();
+            String avance =txtavance.getText();
+            try {
+                respuesta = Algoritmos.rectasTangentes(func, Double.parseDouble(valorinicial));
+            } catch (InvalidInput ex) {
+                Logger.getLogger(Modulo3des.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                PDF.createPdfMod3("results/chapter01/hello_world2.pdf",respuesta,func,"Recta tangente");
+                JOptionPane.showMessageDialog(null,"Pdf Creado con exito");
+            } catch (IOException ex) {
+                Logger.getLogger(Modulo3des.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null,"Algo Fallo");
+            }
+
+        }
+
+    }//GEN-LAST:event_btnpdfActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,6 +340,7 @@ public class Modulo3des extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncalc;
+    private javax.swing.JButton btnpdf;
     private javax.swing.JButton btnreturn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
