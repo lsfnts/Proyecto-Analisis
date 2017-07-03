@@ -6,6 +6,8 @@
 package analisis.gui.mod4;
 
 import analisis.gui.MainMenu;
+import analisis.math.Algoritmos;
+import analisis.math.InvalidInput;
 
 /**
  *
@@ -30,9 +32,33 @@ public class Mod4 extends javax.swing.JFrame {
     private void initComponents() {
 
         jreturn = new javax.swing.JButton();
+        TypeChooser = new javax.swing.JComboBox<>();
+        txtVar1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtLimExtSup = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtLimExtInf = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtVar2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtLimMedSup = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtLimMedInf = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtVar3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtLimIntSup = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtLimIntInf = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtRes = new javax.swing.JTextField();
+        ButCalc = new javax.swing.JButton();
+        txtFunc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jreturn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jreturn.setText("Volver");
         jreturn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -40,21 +66,213 @@ public class Mod4 extends javax.swing.JFrame {
             }
         });
 
+        TypeChooser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TypeChooser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integral Doble", "Integral Triple" }));
+
+        txtVar1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtVar1.setText("x");
+        txtVar1.setPreferredSize(new java.awt.Dimension(80, 25));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Primera Variable");
+
+        txtLimExtSup.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtLimExtSup.setPreferredSize(new java.awt.Dimension(120, 25));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Limite Superior");
+
+        txtLimExtInf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtLimExtInf.setPreferredSize(new java.awt.Dimension(120, 25));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Limite Inferior");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Limite Inferior");
+
+        txtVar2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtVar2.setText("y");
+        txtVar2.setPreferredSize(new java.awt.Dimension(80, 25));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Segunda Variable");
+
+        txtLimMedSup.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtLimMedSup.setPreferredSize(new java.awt.Dimension(120, 25));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("Limite Superior");
+
+        txtLimMedInf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtLimMedInf.setPreferredSize(new java.awt.Dimension(120, 25));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Limite Inferior");
+
+        txtVar3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtVar3.setText("z");
+        txtVar3.setPreferredSize(new java.awt.Dimension(80, 25));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Tercera Variable");
+
+        txtLimIntSup.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtLimIntSup.setPreferredSize(new java.awt.Dimension(120, 25));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Limite Superior");
+
+        txtLimIntInf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtLimIntInf.setPreferredSize(new java.awt.Dimension(120, 25));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Función");
+
+        txtRes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRes.setPreferredSize(new java.awt.Dimension(600, 25));
+
+        ButCalc.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButCalc.setText("Calcular");
+        ButCalc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCalcActionPerformed(evt);
+            }
+        });
+
+        txtFunc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFunc.setPreferredSize(new java.awt.Dimension(600, 25));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jreturn)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jreturn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(TypeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtVar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtLimExtSup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtLimExtInf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(46, 46, 46)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtLimMedInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtLimMedSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtVar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtLimIntInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtLimIntSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtVar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(ButCalc)
+                        .addGap(34, 34, 34)
+                        .addComponent(txtRes, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(149, 149, 149)
+                    .addComponent(txtFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(22, 22, 22)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jreturn)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(TypeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel10)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtVar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLimIntSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLimIntInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtVar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtLimExtSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(txtLimExtInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtVar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtLimMedSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtLimMedInf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)))))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButCalc)
+                    .addComponent(txtRes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(180, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(123, 123, 123)
+                    .addComponent(txtFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(352, Short.MAX_VALUE)))
         );
 
         pack();
@@ -64,6 +282,30 @@ public class Mod4 extends javax.swing.JFrame {
         // TODO add your handling code here:
         MainMenu menu=new MainMenu();menu.setVisible(true);this.setVisible(false);
     }//GEN-LAST:event_jreturnActionPerformed
+
+    private void ButCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCalcActionPerformed
+        String fun = txtFunc.getText();
+		Double lim11 = Double.valueOf(txtLimExtInf.getText());
+		Double lim12 = Double.valueOf(txtLimExtSup.getText());
+		String var1 = txtVar1.getText();
+		String lim21 = txtLimMedInf.getText();
+		String lim22 = txtLimMedSup.getText();
+		String var2 = txtVar2.getText();
+		try {
+			switch(TypeChooser.getSelectedIndex()){
+				case 0:
+					txtRes.setText(Double.toString(Algoritmos.ReglaDeSimpsonDoble(fun, lim11, lim12, var1, lim21, lim22, var2)));
+					break;
+				case 1:
+					String lim31 = txtLimIntInf.getText();
+					String lim32 = txtLimIntSup.getText();
+					String var3 = txtVar3.getText();
+					txtRes.setText(Double.toString(Algoritmos.ReglaDeSimpsonTriple(fun, lim11, lim12, var1, lim21, lim22, var2, lim31, lim32, var3)));
+			}
+		} catch (InvalidInput ii){
+			txtRes.setText("Error en datos ingresados");
+		}
+    }//GEN-LAST:event_ButCalcActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,6 +343,29 @@ public class Mod4 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButCalc;
+    private javax.swing.JComboBox<String> TypeChooser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jreturn;
+    private javax.swing.JTextField txtFunc;
+    private javax.swing.JTextField txtLimExtInf;
+    private javax.swing.JTextField txtLimExtSup;
+    private javax.swing.JTextField txtLimIntInf;
+    private javax.swing.JTextField txtLimIntSup;
+    private javax.swing.JTextField txtLimMedInf;
+    private javax.swing.JTextField txtLimMedSup;
+    private javax.swing.JTextField txtRes;
+    private javax.swing.JTextField txtVar1;
+    private javax.swing.JTextField txtVar2;
+    private javax.swing.JTextField txtVar3;
     // End of variables declaration//GEN-END:variables
 }
