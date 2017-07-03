@@ -106,9 +106,8 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewtonActionPerformed
 
     private void btnIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIMActionPerformed
-        Modulo4 mod4=new Modulo4();
-        mod4.setVisible(true);
-        this.setVisible(false);
+        setContentPane(new Modulo4());
+		revalidate();
     }//GEN-LAST:event_btnIMActionPerformed
 
     private void btnRTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTActionPerformed
