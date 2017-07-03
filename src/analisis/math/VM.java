@@ -476,56 +476,57 @@ public class VM {
 		String s1 = "";
 		if (scanner.hasNext()) {
 			s1 = scanner.next();
-			if(s1.equals(var1)){
-				instructions.add(VAR);
-			} else if(s1.equals(var2)){
-				instructions.add(VAR2);
-			} else if(s1.equals(var3)){
-				instructions.add(VAR3);
-			}else{
-				switch(s1){
-					case "sqrt":
-						instStack.push(SQRT);
-						break;
-					case "cosh":
-						instStack.push(COSH);
-						break;
-					case "sinh": case "senh":
-						instStack.push(SENH);
-						break;
-					case "tanh":
-						instStack.push(TANH);
-						break;
-					case "sech":
-						instStack.push(SECH);
-						break;
-					case "csch":
-						instStack.push(CSCH);
-						break;
-					case "coth": case "ctgh":
-						instStack.push(COTH);
-						break;
-					case "cos":
-						instStack.push(COS);
-						break;
-					case "sin": case "sen":
-						instStack.push(SEN);
-						break;
-					case "tan":
-						instStack.push(TAN);
-						break;
-					case "sec":
-						instStack.push(SEC);
-						break;
-					case "csc":
-						instStack.push(CSC);
-						break;
-					case "cot": case "ctg":
-						instStack.push(COT);
-						break;
-					case "ln":
-						instStack.push(LN);
-				}
+			switch(s1){
+				case "sqrt":
+					instStack.push(SQRT);
+					break;
+				case "cosh":
+					instStack.push(COSH);
+					break;
+				case "sinh": case "senh":
+					instStack.push(SENH);
+					break;
+				case "tanh":
+					instStack.push(TANH);
+					break;
+				case "sech":
+					instStack.push(SECH);
+					break;
+				case "csch":
+					instStack.push(CSCH);
+					break;
+				case "coth": case "ctgh":
+					instStack.push(COTH);
+					break;
+				case "cos":
+					instStack.push(COS);
+					break;
+				case "sin": case "sen":
+					instStack.push(SEN);
+					break;
+				case "tan":
+					instStack.push(TAN);
+					break;
+				case "sec":
+					instStack.push(SEC);
+					break;
+				case "csc":
+					instStack.push(CSC);
+					break;
+				case "cot": case "ctg":
+					instStack.push(COT);
+					break;
+				case "ln":
+					instStack.push(LN);
+					break;
+				default:
+					if(s1.equals(var1)){
+						instructions.add(VAR);
+					} else if(s1.equals(var2)){
+						instructions.add(VAR2);
+					} else if(s1.equals(var3)){
+						instructions.add(VAR3);
+					}
 			}
 		}
 		scanner.close();
