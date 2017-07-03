@@ -198,8 +198,7 @@ public class VM {
 				case POT:
 					double exp = valueStack.pop();
 					double base = valueStack.pop();
-					if(exp%1 == 0) valueStack.push(Algoritmos.intPow(base, (int) exp));
-					else valueStack.push(Math.pow(base, exp));
+					valueStack.push(Math.pow(base, exp));
 					break;
 				case SQRT:
 					double rad = valueStack.pop();
