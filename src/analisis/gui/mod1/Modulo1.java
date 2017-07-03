@@ -251,11 +251,14 @@ public class Modulo1 extends javax.swing.JFrame {
         
         
         
-        funcion =txt_funcionNewton.getText();
+        funcion =txt_funcionNewton.getText().toLowerCase();
+        
         
         
         try{
             valor =Algoritmos.MetodoDeNewton(funcion,tolerancia,iterations);
+            
+            
         
         if( Algoritmos.newton == false){
             lbl_estado.setText("EL METODO FALLO");
