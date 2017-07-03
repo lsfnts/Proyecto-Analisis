@@ -384,7 +384,7 @@ public class VM {
 				}
 				++i;
 			} else {
-				i += takeFun(f.substring(i));
+				i += takeFun(f.substring(i), lastNumRPar);
 				lastNumRPar = false;
 			}
 		}
@@ -467,7 +467,7 @@ public class VM {
 	* @param ...
 	* @return int lenght
 	*/
-	private static int takeFun(String s) throws InvalidInput{
+	private static int takeFun(String s, boolean numOrRPar) throws InvalidInput{
 		Scanner scanner = new Scanner(s);
 		scanner.useDelimiter("[0-9]|(\\(|\\)|\\*|\\+|\\-|\\=|\\[|\\]|\\^|\\/)");
 		String s1 = "";
@@ -519,6 +519,10 @@ public class VM {
 				case "pi": case "PI":
 					instructions.push(PI);
 				default:
+						if(numOrRPar && (!instructions.isEmpty() || !instStack.isEmpty()) ||
+							!valueStack.isEmpty()){
+						instStack.push(MULT);
+					}
 					if(s1.equals(var1)){
 						instructions.add(VAR);
 					} else if(s1.equals(var2)){
