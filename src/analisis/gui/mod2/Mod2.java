@@ -233,6 +233,7 @@ public class Mod2 extends javax.swing.JFrame {
         String var1=varA.getText();
         String var2=varB.getText();
         if(!func.isEmpty() && !var.isEmpty() && !var1.isEmpty() && !var2.isEmpty()){
+            if(var1.matches(".*[0-9]") && var2.matches(".*[0-9]")){
         double inter1=Double.parseDouble(var1);
         double inter2=Double.parseDouble(var2);
         double answer=0.0;
@@ -246,7 +247,7 @@ public class Mod2 extends javax.swing.JFrame {
            DataTable data2 = new DataTable(Double.class,Double.class);
            
            double y=0.0,y2=0.0;
-           for (double x = -10; x <= 10; x++) {
+           for (double x = -10; x <= 10; x+=0.2) {
                try {
                    y=VM.eval(func,x,var);
                    System.out.println(y);
@@ -256,7 +257,7 @@ public class Mod2 extends javax.swing.JFrame {
             data.add(x,y);
         }
            if(inter1<inter2){
-               for (double x = inter1; x <=inter2; x++) {
+               for (double x = inter1; x <=inter2; x+=0.5) {
                    try {
                        y2=VM.eval(func,x,var);
                        System.out.println(y2);
@@ -289,6 +290,7 @@ public class Mod2 extends javax.swing.JFrame {
             gPanel.repaint();
             gPanel.setVisible(true);
             result.setText("Y= "+Double.toString(answer));
+            }
         }
         else{
             result.setText("Error. Ingrese valores validos");
