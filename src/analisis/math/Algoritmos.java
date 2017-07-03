@@ -21,7 +21,7 @@ public class Algoritmos {
         
 
     
-    public static String MetodoDeNewton(String funcion, double tolerancia, int iterations){
+    public static String MetodoDeNewton(String funcion, double tolerancia, int iterations) throws InvalidInput{
         iteraciones=0;
         double pinicial = 1; //p0
         double pgorro = 0; //p1
@@ -71,37 +71,55 @@ public class Algoritmos {
        //System.out.println("fallo  "+pgorro+" iteraciones  "+ iteraciones);
     }
 	
-	public static double ReglaDeSimpsonTriple(String f, double a, double b, String c, String d, String s, String t){
-		//n=10, m=10, p=0
+	public static double ReglaDeSimpsonTriple(String f, double a, double b, String var1,
+			String c, String d,String var2, String s, String t,String var3) throws InvalidInput{
+		//n=10, m=10, p=10
+		long startTime =System.currentTimeMillis();
 		double h = (b-a)/20;
 		double J1=0, J2=0, J3=0;
 		
+		//variables integral externa
+		double x;
+		double Cx;
+		double Dx;
+		double HX;
+		
+		//varibales integral intermedia
+		double y;
+		double Sy;
+		double Ty;
+		double HY;
+		
+		//variables integral interna
+		double z;
+		double R;
+		
 		for(int i = 0; i <= 20; ++i){
-			double x = a+(i*h);
-			double Cx = VM.eval(c, x);
-			double Dx = VM.eval(d, x);
-			double HX = (Dx-Cx)/20;
+			x = a+(i*h);
+			Cx = VM.eval(c, x, var1);
+			Dx = VM.eval(d, x, var1);
+			HX = (Dx-Cx)/20;
 			
 			double K1 =0, K2 = 0, K3 = 0;
 			
 			for(int j = 0; j <= 20; ++j){
-				double y = Cx + j*HX;
-				double Sx = VM.eval(s, x, y);
-				double Tx = VM.eval(t, x, y);
-				double HY = (Tx-Sx)/20;
+				y = Cx + j*HX;
+				Sy = VM.eval(s, x, var1, y, var2);
+				Ty = VM.eval(t, x, var1, y, var2);
+				HY = (Ty-Sy)/20;
 				
-				double S1 = VM.eval(f, x, Cx, Sx) + VM.eval(f, x, Dx, Tx);
-				double S2 = 0, S3 = 0;
+				double S1 = 0, S2 = 0, S3 = 0;
 				
-				for(int k = 0; k < 20; ++k){
-					double z = Sx + k*HY;
-					double R = VM.eval(f, x, y, z);
-					
-					if(k%2 == 0) S2 += R;
+				for(int k = 0; k <= 20; ++k){
+					z = Sy + k*HY;
+					R = VM.eval(f, x, var1, y, var2, z, var3);
+					if(k == 0 || k == 20) S1 += R;
+					else if(k%2 == 0) S2 += R;
 					else S3 += R;
 				}
 				
-				double Q = (S1 + 2*S2 + 4*S3)*HY/3;;
+				double Q = (S1 + 2*S2 + 4*S3)*HY/3;
+				
 				if(i == 0 || i == 20) K1 += Q;
 				else if(j%2 == 0) K2 += Q;
 				else K3 += Q;
@@ -113,22 +131,23 @@ public class Algoritmos {
 			else if (i % 2 == 0) J2 += L;
 			else J3 += L;
 		}
-		
+		System.out.println(System.currentTimeMillis()-startTime);
 		return h*(J1 + 2*J2 + 4*J3)/3;
 	}
 	
-	public static double ReglaDeSimpsonDoble(String f, double a, double b, String c, String d){
+	public static double ReglaDeSimpsonDoble(String f, double a, double b, String var1,
+			String c, String d, String var2) throws InvalidInput{
 		//n=20, m=20
 		double h = (b-a)/20;
 		double J1=0, J2=0, J3=0;
 		
 		for(int i = 0; i <= 20; ++i){
 			double x = a+(i*h);
-			double Cx = VM.eval(c, x);
-			double Dx = VM.eval(d, x);
+			double Cx = VM.eval(c, x, var1);
+			double Dx = VM.eval(d, x, var1);
 			double HX = (Dx-Cx)/20;
 			
-			double K1 = VM.eval(f, x, Cx) + VM.eval(f, x, Dx);
+			double K1 = VM.eval(f, x, Cx) + VM.eval(f, x, var1, Dx, var2);
 			double K2 = 0, K3 = 0;
 			
 			for(int j = 1; j < 20; ++j){
@@ -149,14 +168,13 @@ public class Algoritmos {
 		return h*(J1 + 2*J2 + 4*J3)/3;
 	}
 	
-	public static double ReglaDeSimpsonSimple(String f, double a, double b, String var){
+	public static double ReglaDeSimpsonSimple(String f, double a, double b, String var) throws InvalidInput{
 		//n=10
 		double h = (b-a)/20;
 		double K1=0, K2=0, K3=0;
 		
 		double x;
 		for(int i = 0; i <= 20; ++i){
-			System.out.println(i);
 			x = a+(i*h);
 			
 			
@@ -178,12 +196,12 @@ public class Algoritmos {
 		 * @param k grado de la derivada
 		 * @return 
 		 */
-	public static double derivar(String fun, double x, int k){
+	public static double derivar(String fun, double x, int k) throws InvalidInput{
 		return deltaCentral(fun, x, 0.000001, k)/Math.pow(0.000001, k);
 	}
 	
 		
-	public static double deltaCentral(String fun, double x, double h, int k){
+	public static double deltaCentral(String fun, double x, double h, int k) throws InvalidInput{
 		double deltaY=0;
 		for (int i = 0; i <=k;++i){
 			if(i%2==0){
@@ -229,7 +247,7 @@ public class Algoritmos {
         return (factorialm / (factorialn * factorialmn));
 
 	}
-        public static String rectasTangentes(String funcion, Double valorinicial){
+        public static String rectasTangentes(String funcion, Double valorinicial) throws InvalidInput{
                double ordenada=(VM.eval(funcion, valorinicial));
                double pendiente=(derivar(funcion,valorinicial,1));
                double abcisa= pendiente*(-valorinicial);
@@ -245,9 +263,26 @@ public class Algoritmos {
                else{
                     return String.valueOf(ordenada)+"+"+String.valueOf(pendiente)+"*x"+String.valueOf(abcisa);
                } 
-               
-              
-                    
-            
+
         }
+		
+	public static double pow(double x, int n){
+		if(n < 0){
+			x = 1 / x;
+			n = -n;
+		}
+		if(n == 0) return 1;
+		double y = 1;
+		while(n > 1){
+		 if (n%2 == 0){ 
+			x = x * x;
+			n = n / 2;
+		 } else{
+			y = x * y;
+			x = x * x;
+			n = (n - 1) / 2;
+		 }
+		}
+		return x * y;
+	}
 }
