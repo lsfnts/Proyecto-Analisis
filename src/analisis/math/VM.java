@@ -62,7 +62,7 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX, String var1) throws InvalidInput{
-		VM.var1 = var1;
+		VM.var1 = var1.trim();
 		prepare(fun);
 		return evaluar(valX, 0, 0);
 	}
@@ -519,8 +519,7 @@ public class VM {
 				case "pi": case "PI":
 					instructions.push(PI);
 				default:
-						if(numOrRPar && (!instructions.isEmpty() || !instStack.isEmpty()) ||
-							!valueStack.isEmpty()){
+					if(numOrRPar && (!instructions.isEmpty() || !instStack.isEmpty())){
 						instStack.push(MULT);
 					}
 					if(s1.equals(var1)){

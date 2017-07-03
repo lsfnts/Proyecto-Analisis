@@ -247,7 +247,7 @@ public class Mod2 extends javax.swing.JFrame {
            double y=0.0,y2=0.0;
            for (double x = -10; x <= 10; x++) {
                try {
-                   y=VM.eval(func,x);
+                   y=VM.eval(func,x,var);
                    System.out.println(y);
                } catch (Exception e) {
                    
@@ -257,7 +257,7 @@ public class Mod2 extends javax.swing.JFrame {
            if(inter1<inter2){
                for (double x = inter1; x <=inter2; x++) {
                    try {
-                       y2=VM.eval(func,x);
+                       y2=VM.eval(func,x,var);
                        System.out.println(y2);
                    } catch (InvalidInput ex) {
                        Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
@@ -268,7 +268,7 @@ public class Mod2 extends javax.swing.JFrame {
            else{
                 for (double x = inter2; x <=inter1; x++) {
                    try {
-                       y2=VM.eval(func,x);
+                       y2=VM.eval(func,x,var);
                    } catch (InvalidInput ex) {
                        Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
                    }

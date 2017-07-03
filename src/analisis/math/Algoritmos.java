@@ -148,12 +148,12 @@ public class Algoritmos {
 			double Dx = VM.eval(d, x, var1);
 			double HX = (Dx-Cx)/20;
 			
-			double K1 = VM.eval(f, x, Cx) + VM.eval(f, x, var1, Dx, var2);
+			double K1 = VM.eval(f, x, var1, Cx, var2) + VM.eval(f, x, var1, Dx, var2);
 			double K2 = 0, K3 = 0;
 			
 			for(int j = 1; j < 20; ++j){
 				double y = Cx + j*HX;
-				double Q = VM.eval(f, x, y);
+				double Q = VM.eval(f, x, var1, y, var2);
 				
 				if(j%2 == 0) K2 += Q;
 				else K3 += Q;
@@ -181,7 +181,7 @@ public class Algoritmos {
 			
 			if(i == 0 || i == 20) K1 += VM.eval(f, x, var);
 			else if (i % 2 == 0) K2 += VM.eval(f, x, var);
-			else K3 += VM.eval(f, x);
+			else K3 += VM.eval(f, x, var);
 		}
 		
 		return h*(K1 + 2*K2 + 4*K3)/3;
