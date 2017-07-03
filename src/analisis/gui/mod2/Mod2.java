@@ -6,6 +6,7 @@
 package analisis.gui.mod2;
 
 import analisis.gui.MainMenu;
+import analisis.gui.mod3.Modulo3des;
 import analisis.math.Algoritmos;
 import analisis.math.InvalidInput;
 import analisis.math.VM;
@@ -17,6 +18,7 @@ import de.erichseifert.gral.ui.InteractivePanel;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.chart.PieChart;
 
 /**
  *
@@ -125,67 +127,59 @@ public class Mod2 extends javax.swing.JFrame {
         lResult.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lResult.setText("Resultado:");
 
-        javax.swing.GroupLayout gPanelLayout = new javax.swing.GroupLayout(gPanel);
-        gPanel.setLayout(gPanelLayout);
-        gPanelLayout.setHorizontalGroup(
-            gPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-        gPanelLayout.setVerticalGroup(
-            gPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
-        );
+        gPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 243, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lResult)
-                        .addGap(474, 474, 474))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(262, 262, 262))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(311, 311, 311))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(back)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(257, 257, 257))
+                        .addComponent(jLabel7)
+                        .addGap(669, 669, 669))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(back)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lFunction)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inter)
-                                    .addComponent(function, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(d)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(varA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(a)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lFunction)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(inter)
+                                            .addComponent(function, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(d)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(varA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(a)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(varB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lValue)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(variable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addComponent(start)))
                                 .addGap(18, 18, 18)
-                                .addComponent(varB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(variable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(start)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                        .addComponent(gPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(gPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,14 +208,14 @@ public class Mod2 extends javax.swing.JFrame {
                             .addComponent(variable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addComponent(start))
-                    .addComponent(gPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(gPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lResult))
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel7)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,39 +231,64 @@ public class Mod2 extends javax.swing.JFrame {
         String var=variable.getText();
         String var1=varA.getText();
         String var2=varB.getText();
-        Double inter1=Double.parseDouble(var1);
-        Double inter2=Double.parseDouble(var2);
-        Double answer=0.0;
-        try {
-            answer = Algoritmos.ReglaDeSimpsonSimple(func,inter1,inter2,"nose");
-        } catch (InvalidInput ex) {
-            Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
+        double inter1=Double.parseDouble(var1);
+        double inter2=Double.parseDouble(var2);
+        double answer=0.0;
+        System.out.println(func+" "+var+" "+var1+" "+var2);
+           try {
+            answer=Algoritmos.ReglaDeSimpsonSimple(func,inter1,inter2,var);
+        } catch (InvalidInput input) {
+            Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null,input);
         }
-        DataTable data = new DataTable(Double.class, Double.class);
-     DataTable data2 = new DataTable(Double.class, Double.class);
-     double y=0;
-        for (double x = -5.0; x <= 5.0; x+=0.25) {
-            
-            try {
-                y = VM.eval(func,x);
-            } catch (InvalidInput ex) {
-                Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            data.add(x, y);
+           DataTable data = new DataTable(Double.class,Double.class);
+           DataTable data2 = new DataTable(Double.class,Double.class);
+           
+           double y=0.0,y2=0.0;
+           for (double x = -10; x <= 10; x++) {
+               try {
+                   y=VM.eval(func,x);
+                   System.out.println(y);
+               } catch (Exception e) {
+                   
+               }
+            data.add(x,y);
         }
-        for (double x = -10.0; x <= 10.0; x+=1) {
-            y = Math.cos(x);
-            data2.add(x, y);
-        }
-         XYPlot plot = new XYPlot(data);
-         XYPlot plot2 = new XYPlot(data2);
-          LineRenderer lines = new DefaultLineRenderer2D();
-        Color color = new Color(0.0f, 0.3f, 1.0f);
-       gPanel.add(new InteractivePanel(plot));
-       gPanel.add(new InteractivePanel(plot2));
-       gPanel.revalidate();
-       gPanel.repaint();
-       result.setText(answer+"");
+           if(inter1<inter2){
+               for (double x = inter1; x <=inter2; x++) {
+                   try {
+                       y2=VM.eval(func,x);
+                       System.out.println(y2);
+                   } catch (InvalidInput ex) {
+                       Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                   data2.add(x,y2);
+               }
+           }
+           else{
+                for (double x = inter2; x <=inter1; x++) {
+                   try {
+                       y2=VM.eval(func,x);
+                   } catch (InvalidInput ex) {
+                       Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                   data2.add(x,y2);
+               }
+           }
+           XYPlot plot = new XYPlot(data,data2);
+           LineRenderer lines = new DefaultLineRenderer2D();
+           plot.setLineRenderer(data, lines);
+           LineRenderer lines2 = new DefaultLineRenderer2D();
+           plot.setLineRenderer(data2,lines2);
+           Color color = new Color(0.0f, 0.3f, 1.0f);
+            plot.getPointRenderer(data).setColor(color);
+            plot.getLineRenderer(data).setColor(color);
+            gPanel.add(new InteractivePanel(plot));
+            gPanel.revalidate();
+            gPanel.repaint();
+            gPanel.setVisible(true);
+            result.setText(Double.toString(answer));
+           
+           
        
 
     }//GEN-LAST:event_startActionPerformed
