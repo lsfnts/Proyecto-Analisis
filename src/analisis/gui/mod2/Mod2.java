@@ -232,6 +232,7 @@ public class Mod2 extends javax.swing.JFrame {
         String var=variable.getText();
         String var1=varA.getText();
         String var2=varB.getText();
+        if(!func.isEmpty() && !var.isEmpty() && !var1.isEmpty() && !var2.isEmpty()){
         double inter1=Double.parseDouble(var1);
         double inter2=Double.parseDouble(var2);
         double answer=0.0;
@@ -288,7 +289,10 @@ public class Mod2 extends javax.swing.JFrame {
             gPanel.repaint();
             gPanel.setVisible(true);
             result.setText("Y= "+Double.toString(answer));
-           
+        }
+        else{
+            result.setText("Error. Ingrese valores validos");
+        }
            
        
 
