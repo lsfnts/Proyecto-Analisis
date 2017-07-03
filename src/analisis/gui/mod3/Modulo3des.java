@@ -50,6 +50,10 @@ public class Modulo3des extends javax.swing.JFrame {
         txtresultado = new javax.swing.JTextField();
         btnreturn = new javax.swing.JButton();
         pnlvista = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtrango = new javax.swing.JTextField();
+        txtavance = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -129,6 +133,10 @@ public class Modulo3des extends javax.swing.JFrame {
 
         pnlvista.setLayout(new java.awt.BorderLayout());
 
+        jLabel3.setText("Intervalo en X y Y");
+
+        jLabel4.setText("Avance de grafica(opcional)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,14 +145,33 @@ public class Modulo3des extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtavance, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(txtrango))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlvista, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtrango, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtavance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 19, Short.MAX_VALUE))
         );
 
@@ -152,28 +179,29 @@ public class Modulo3des extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcActionPerformed
+     pnlvista.removeAll();
      String func =txtfunc.getText();
      double valorinicial = Double.parseDouble(txtx0.getText());
+     double rango = Double.parseDouble(txtrango.getText());
+     double avance = Double.parseDouble(txtavance.getText());
      String respuesta=Algoritmos.rectasTangentes(func, valorinicial);
      DataTable data = new DataTable(Double.class, Double.class);
      DataTable data2 = new DataTable(Double.class, Double.class);
-        for (double x = -5.0; x <= 5.0; x+=0.25) {
-            double y = VM.eval(func,x);
+     double y, y2;        for (double x = -rango; x <= rango; x+=avance) {
+            y = VM.eval(func,x);
             data.add(x, y);
         }
-        for (double x = -10.0; x <= 10.0; x+=1) {
-            double y = Math.cos(x);
+        for (double x = -rango; x <= rango; x+=avance) {
+            y = VM.eval(respuesta,x);
             data2.add(x, y);
         }
-         XYPlot plot = new XYPlot(data);
-         XYPlot plot2 = new XYPlot(data2);
-          LineRenderer lines = new DefaultLineRenderer2D();
+         XYPlot plot = new XYPlot(data,data2);
+         LineRenderer lines = new DefaultLineRenderer2D();
         Color color = new Color(0.0f, 0.3f, 1.0f);
        pnlvista.add(new InteractivePanel(plot));
-       pnlvista.add(new InteractivePanel(plot2));
        pnlvista.revalidate();
        pnlvista.repaint();
-     txtresultado.setText(respuesta);
+     txtresultado.setText("y ="+respuesta);
     
         
        
@@ -228,10 +256,14 @@ public class Modulo3des extends javax.swing.JFrame {
     private javax.swing.JButton btnreturn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblf;
     private javax.swing.JPanel pnlvista;
+    private javax.swing.JTextField txtavance;
     private javax.swing.JTextField txtfunc;
+    private javax.swing.JTextField txtrango;
     private javax.swing.JTextField txtresultado;
     private javax.swing.JTextField txtx0;
     // End of variables declaration//GEN-END:variables

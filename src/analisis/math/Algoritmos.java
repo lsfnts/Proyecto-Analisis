@@ -236,14 +236,14 @@ public class Algoritmos {
                
                if(abcisa>0 && pendiente>0){
                    
-                   return  "y ="+String.valueOf(ordenada)+" + "+String.valueOf(pendiente)+"*X + "+String.valueOf(abcisa);
+                   return  String.valueOf(ordenada)+"+"+String.valueOf(pendiente)+"*x+"+String.valueOf(abcisa);
                
                }
                else if(abcisa>0){
-                    return "y ="+String.valueOf(ordenada)+" "+String.valueOf(pendiente)+"*X + "+String.valueOf(abcisa);
+                    return String.valueOf(ordenada)+"+"+String.valueOf(pendiente)+"*x+"+String.valueOf(abcisa);
                }
                else{
-                    return "y ="+String.valueOf(ordenada)+" + "+String.valueOf(pendiente)+"*X "+String.valueOf(abcisa);
+                    return String.valueOf(ordenada)+"+"+String.valueOf(pendiente)+"*x"+String.valueOf(abcisa);
                } 
                
               
