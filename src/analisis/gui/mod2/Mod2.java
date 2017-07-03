@@ -280,7 +280,7 @@ public class Mod2 extends javax.swing.JFrame {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        MainMenu menu=new MainMenu();menu.setVisible(true);this.setVisible(false);
+        MainMenu menu=new MainMenu();menu.setVisible(true);menu.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
 
     private void resultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultActionPerformed

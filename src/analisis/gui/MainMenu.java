@@ -102,20 +102,20 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewtonActionPerformed
-        Modulo1 mod = new Modulo1(); mod.setVisible(true);this.setVisible(false);
+        Modulo1 mod = new Modulo1(); mod.setVisible(true);mod.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_btnNewtonActionPerformed
 
     private void btnIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIMActionPerformed
-        Mod4 mod4=new Mod4();mod4.setVisible(true);this.setVisible(false);
+        Mod4 mod4=new Mod4();mod4.setVisible(true);mod4.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_btnIMActionPerformed
 
     private void btnRTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTActionPerformed
-        Modulo3des mod3 = new Modulo3des(); mod3.setVisible(true);this.setVisible(false);
+        Modulo3des mod3 = new Modulo3des();mod3.setLocationRelativeTo(null);mod3.setVisible(true);this.setVisible(false);
     }//GEN-LAST:event_btnRTActionPerformed
 
     private void btnABCurvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnABCurvaActionPerformed
         // TODO add your handling code here:
-        Mod2 mod2=new Mod2();mod2.setVisible(true);this.setVisible(false);
+        Mod2 mod2=new Mod2();mod2.setVisible(true);mod2.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_btnABCurvaActionPerformed
 
 	/**
@@ -148,7 +148,10 @@ public class MainMenu extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new MainMenu().setVisible(true);
+				MainMenu mm = new MainMenu();
+				mm.pack();
+				mm.setLocationRelativeTo(null);
+				mm.setVisible(true);
 			}
 		});
 	}

@@ -55,6 +55,7 @@ public class Mod4 extends javax.swing.JFrame {
         txtRes = new javax.swing.JTextField();
         ButCalc = new javax.swing.JButton();
         txtFunc = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,6 +149,9 @@ public class Mod4 extends javax.swing.JFrame {
         txtFunc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtFunc.setPreferredSize(new java.awt.Dimension(629, 30));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Intrgrales múltiples");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,7 +160,9 @@ public class Mod4 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jreturn))
+                        .addComponent(jreturn)
+                        .addGap(204, 204, 204)
+                        .addComponent(jLabel7))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addComponent(TypeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,7 +227,9 @@ public class Mod4 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jreturn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jreturn)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(TypeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
@@ -286,7 +294,7 @@ public class Mod4 extends javax.swing.JFrame {
 
     private void jreturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jreturnActionPerformed
         // TODO add your handling code here:
-        MainMenu menu=new MainMenu();menu.setVisible(true);this.setVisible(false);
+        MainMenu menu=new MainMenu();menu.setVisible(true);menu.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_jreturnActionPerformed
 
     private void ButCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCalcActionPerformed
@@ -379,6 +387,7 @@ public class Mod4 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jreturn;
     private javax.swing.JLabel lblLimIntInf;
     private javax.swing.JLabel lblLimIntSup;

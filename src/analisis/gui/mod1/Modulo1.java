@@ -307,7 +307,7 @@ public class Modulo1 extends javax.swing.JFrame {
 
     private void jreturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jreturnActionPerformed
         // TODO add your handling code here:
-        MainMenu menu=new MainMenu();menu.setVisible(true);this.setVisible(false);
+        MainMenu menu=new MainMenu();menu.setVisible(true);menu.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_jreturnActionPerformed
 
     /**

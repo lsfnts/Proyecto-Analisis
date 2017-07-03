@@ -251,7 +251,7 @@ public class Modulo3des extends javax.swing.JFrame {
 
     private void btnreturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreturnActionPerformed
         // TODO add your handling code here:
-        MainMenu menu=new MainMenu();menu.setVisible(true);this.setVisible(false);
+        MainMenu menu=new MainMenu();menu.setVisible(true);menu.setLocationRelativeTo(null);this.setVisible(false);
     }//GEN-LAST:event_btnreturnActionPerformed
 
     /**
