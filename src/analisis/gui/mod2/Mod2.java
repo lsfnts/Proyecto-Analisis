@@ -286,7 +286,7 @@ public class Mod2 extends javax.swing.JFrame {
             gPanel.revalidate();
             gPanel.repaint();
             gPanel.setVisible(true);
-            result.setText(Double.toString(answer));
+            result.setText("Y= "+Double.toString(answer));
            
            
        
