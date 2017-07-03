@@ -60,7 +60,7 @@ public class VM {
 	 * @param var1 nombre de la variable variable
 	 * @return 
 	 */
-	public static double eval(String fun, double valX, String var1){
+	public static double eval(String fun, double valX, String var1) throws InvalidInput{
 		VM.var1 = var1;
 		prepare(fun);
 		return evaluar(valX, 0, 0);
@@ -75,7 +75,7 @@ public class VM {
 	 * @param var2 nombre de segunda variable
 	 * @return 
 	 */
-	public static double eval(String fun, double valX, String var1, double valY, String var2){
+	public static double eval(String fun, double valX, String var1, double valY, String var2) throws InvalidInput{
 		VM.var1 = var1;
 		VM.var2 = var2;
 		prepare(fun);
@@ -94,7 +94,7 @@ public class VM {
 	 * @return 
 	 */
 	public static double eval(String fun, double valX, String var1, double valY,
-			String var2, double valZ, String var3){
+			String var2, double valZ, String var3) throws InvalidInput{
 		VM.var1 = var1;
 		VM.var2 = var2;
 		VM.var3 = var3;
@@ -108,7 +108,7 @@ public class VM {
 	 * @param valX punto a evaluar (valor de x)
 	 * @return 
 	 */
-	public static double eval(String fun, double valX){
+	public static double eval(String fun, double valX) throws InvalidInput{
 		resetVar();
 		prepare(fun);
 		return evaluar(valX, 0, 0);
@@ -121,7 +121,7 @@ public class VM {
 	 * @param valY punto a evaluar (valor de y)
 	 * @return 
 	 */
-	public static double eval(String fun, double valX, double valY){
+	public static double eval(String fun, double valX, double valY) throws InvalidInput{
 		resetVar();
 		prepare(fun);
 		return evaluar(valX, valY, 0);
@@ -135,7 +135,7 @@ public class VM {
 	 * @param valZ punto a evaluar (valor de z)
 	 * @return 
 	 */
-	public static double eval(String fun, double valX, double valY, double valZ){
+	public static double eval(String fun, double valX, double valY, double valZ) throws InvalidInput{
 		resetVar();
 		prepare(fun);
 		return evaluar(valX, valY, valZ);
@@ -155,8 +155,6 @@ public class VM {
 	 * @return 
 	 */
     private static double evaluar(double var1Val, double var2Val, double var3Val){
-		//System.out.println(instructions);
-		
 		//recorre el stack hasta que no encuentre mas instrucciones
         while (!instructions.isEmpty()){
 			//toma la primera instrucción y realiza la accion apropiada
@@ -199,7 +197,8 @@ public class VM {
 				case POT:
 					double exp = valueStack.pop();
 					double base = valueStack.pop();
-					valueStack.push(Math.pow(base, exp));
+					//if(exp%1 == 0) valueStack.push(Algoritmos.pow(base, (int) exp));
+					/*else*/ valueStack.push(Math.pow(base, exp));
 					break;
 				case SQRT:
 					double rad = valueStack.pop();
@@ -268,7 +267,6 @@ public class VM {
 					valueStack.push(var3Val);
 					break;
             }
-			System.out.println(valueStack);
         }
 		return valueStack.pop();
     }
@@ -278,7 +276,7 @@ public class VM {
 	 * operaciones y valores contenidos
 	 * @param f 
 	 */
-	private static void prepare(String f){
+	private static void prepare(String f) throws InvalidInput{
 		f = f.replaceAll(" ", "").toLowerCase();
 		char c;
 		byte[] b;
@@ -288,12 +286,10 @@ public class VM {
 		boolean lastNumRPar = false;
 		while(i < max){
 			c = f.charAt(i);
-			System.out.println("caracter actual: "+c);
 			//si es un numero
 			if(Character.isDigit(c)){
 				//quitar
 				String doub = takeNumber(f.substring(i));
-				System.out.println("cadena eval: "+f.substring(i));
 				double d = Double.parseDouble(doub);
 				b = doubleToBytes(d);
 				instructions.add(NUM);
@@ -384,7 +380,6 @@ public class VM {
 						lastNumRPar = false;
 						break;
 				}
-				System.out.println("instStack: "+instStack);
 				++i;
 			} else {
 				i += takeFun(f.substring(i));
@@ -470,7 +465,7 @@ public class VM {
 	* @param ...
 	* @return int lenght
 	*/
-	private static int takeFun(String s){
+	private static int takeFun(String s) throws InvalidInput{
 		Scanner scanner = new Scanner(s);
 		scanner.useDelimiter("[0-9]|(\\(|\\)|\\*|\\+|\\-|\\=|\\[|\\]|\\^|\\/)");
 		String s1 = "";
@@ -526,7 +521,7 @@ public class VM {
 						instructions.add(VAR2);
 					} else if(s1.equals(var3)){
 						instructions.add(VAR3);
-					}
+					} else throw new InvalidInput(s1);
 			}
 		}
 		scanner.close();
