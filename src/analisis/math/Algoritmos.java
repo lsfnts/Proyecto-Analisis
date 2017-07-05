@@ -21,7 +21,56 @@ public class Algoritmos {
         
         
 
-    
+    public static String MetodoDeNewton(String funcion, double tolerancia, int iterations, double pini) throws InvalidInput{
+        iteraciones=0;
+        double pinicial = pini; //p0
+        double pgorro = 0; //p1
+        double error;
+        int t=200;
+        int s=1;
+        apr = new Double[t];
+        apr[0]=pinicial;
+        
+        
+        while(iteraciones<iterations){
+            
+            pgorro = (pinicial - ((VM.eval(funcion, pinicial))/(derivar(funcion,pinicial,1))));
+            apr[s]=pgorro;
+            s++;
+            
+      
+            error = Math.abs(pgorro - pinicial) ;
+            //pgorro = (pinicial - (((Math.pow(pinicial,3))+ (3*pinicial)+1)/((3*(Math.pow(pinicial,2)))+3)));
+            if (error< tolerancia){
+                iteraciones ++;
+                newton = true;
+                object[0]=iteraciones;
+                object[1]=pinicial;
+                object[2]=pgorro;
+                object[3]=error;
+                modelo.addRow(object);
+                raiz=pgorro;
+                
+                return df.format(pgorro);
+                //System.out.println("EXITO "+pgorro);
+                
+            }else{
+                iteraciones++;
+                object[0]=iteraciones;
+                object[1]=pinicial;
+                object[2]=pgorro;
+                object[3]=error;
+                modelo.addRow(object);
+                pinicial = pgorro;
+                
+            }
+        }
+        
+        newton = false;
+        return df.format(pgorro);
+       //System.out.println("fallo  "+pgorro+" iteraciones  "+ iteraciones);
+    }
+	
     public static String MetodoDeNewton(String funcion, double tolerancia, int iterations) throws InvalidInput{
         iteraciones=0;
         double pinicial = 1; //p0
@@ -268,10 +317,15 @@ public class Algoritmos {
         }
 	
 	public static double area(String fun, double a, double b, String var) throws InvalidInput{
-		double raiz = Double.valueOf(MetodoDeNewton(fun, 0.000004, 20));
-		if(Integer.signum((Double.compare(raiz, a)*Double.compare(raiz, b))) < 0){
-			return Math.abs(ReglaDeSimpsonSimple(fun, a, raiz, var))+ Math.abs(ReglaDeSimpsonSimple(fun, raiz, b, var));
-		} else return Math.abs(ReglaDeSimpsonSimple(fun, a, raiz, var));
+		double raiz1 = Double.valueOf(MetodoDeNewton(fun, 0.0001, 30, a));
+		double raiz2 = Double.valueOf(MetodoDeNewton(fun, 0.0001, 30, b));
+		if(Integer.signum((Double.compare(raiz1, a)*Double.compare(raiz1, b))) < 0 ||
+				Integer.signum((Double.compare(raiz2, a)*Double.compare(raiz2, b))) < 0){
+			return Math.abs(ReglaDeSimpsonSimple(fun, a, raiz1, var))+ Math.abs(ReglaDeSimpsonSimple(fun, raiz1, b, var))+
+					Math.abs(ReglaDeSimpsonSimple(fun, a, raiz2, var))+ Math.abs(ReglaDeSimpsonSimple(fun, raiz2, b, var));
+		} else{
+			return Math.abs(ReglaDeSimpsonSimple(fun, a, raiz1, var));
+		}
 	}
 		
 	static public final double PI = 3.1415926535897932;

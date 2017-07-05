@@ -239,42 +239,40 @@ public class Mod2 extends javax.swing.JFrame {
         double inter1=Double.parseDouble(var1);
         double inter2=Double.parseDouble(var2);
         double answer=0.0;
-        System.out.println(func+" "+var+" "+var1+" "+var2);
            try {
             answer=Algoritmos.ReglaDeSimpsonSimple(func,inter1,inter2,var);
         } catch (InvalidInput input) {
-            Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null,input);
+            result.setText("error en los datos ingresados");
         }
            DataTable data = new DataTable(Double.class,Double.class);
            DataTable data2 = new DataTable(Double.class,Double.class);
            
            double y=0.0,y2=0.0;
-           for (double x = -10; x <= 10; x+=0.2) {
+		   double extra = (inter2-inter1)*0.5;
+           for (double x = inter1-extra; x <= inter2+extra; x+=0.25) {
                try {
                    y=VM.eval(func,x,var);
-                   System.out.println(y);
                } catch (Exception e) {
                    
                }
             data.add(x,y);
         }
            if(inter1<inter2){
-               for (double x = inter1; x <=inter2; x+=0.5) {
+               for (double x = inter1; x <=inter2; x+=0.2) {
                    try {
                        y2=VM.eval(func,x,var);
-                       System.out.println(y2);
                    } catch (InvalidInput ex) {
-                       Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
+                       result.setText("error en los datos ingresados");
                    }
                    data2.add(x,y2);
                }
            }
            else{
-                for (double x = inter2; x <=inter1; x++) {
+                for (double x = inter2; x <=inter1; x+=0.2) {
                    try {
                        y2=VM.eval(func,x,var);
                    } catch (InvalidInput ex) {
-                       Logger.getLogger(Mod2.class.getName()).log(Level.SEVERE, null, ex);
+                       result.setText("error en los datos ingresados");
                    }
                    data2.add(x,y2);
                }
@@ -283,6 +281,7 @@ public class Mod2 extends javax.swing.JFrame {
            LineRenderer lines = new DefaultLineRenderer2D();
            plot.setLineRenderer(data, lines);
            AreaRenderer area = new DefaultAreaRenderer2D();
+		   area.setColor(Color.LIGHT_GRAY);
            plot.setAreaRenderer(data2,area);
            Color color = new Color(0.0f, 0.3f, 1.0f);
             plot.getPointRenderer(data).setColor(color);
@@ -291,7 +290,7 @@ public class Mod2 extends javax.swing.JFrame {
             gPanel.revalidate();
             gPanel.repaint();
             gPanel.setVisible(true);
-            result.setText("Y= "+Double.toString(answer));
+            result.setText(Double.toString(answer)+ " u^2");
             }
         }
         else{
